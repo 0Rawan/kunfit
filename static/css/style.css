@@ -1,0 +1,664 @@
+:root{
+  --black:#3c3563;
+  --blue:rgb(37, 150, 190);
+  --gradient:linear-gradient(310deg, var(--black) 0%, var(--blue) 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  color: var(--black);
+}
+
+a {
+  text-decoration: none;
+  color: var(--black);
+}
+
+
+hr {
+  border: 0.5px solid lightgray;
+  margin: 10px 0 0 0;
+}
+
+ h1 {
+  text-transform: uppercase;
+  font-size: 1.15em;
+  margin-bottom: 0.8em;
+}
+
+
+#user-dashboard :is(h1){
+  margin: 0.8em 0;
+}
+
+h2{
+  font-size: 1.1em;
+  font-weight: 500;
+}
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .8rem 2rem;
+  border-radius: 5rem;
+  background: var(--gradient);
+  font-size: 1.7rem;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  transition: all .3s linear;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* media query breakpoints */
+body {
+  background-color: #f5f5fb;
+  color: var(--black);
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  left: 0;
+  -webkit-transition: left 0.3s, background-color 0.3s;
+  transition: left 0.3s, background-color 0.3s;
+}
+
+body.dark {
+  color: #ffffff;
+  background-color: #2c2b3b;
+}
+
+.container1{
+  padding: 1rem;
+}
+
+.container1.start-workout .inner-container{
+  background-image:  linear-gradient(310deg, rgb(20, 23, 39) 0%, rgb(37, 150, 190) 100%);
+}
+
+.container1.start-workout p{
+color: white  ;
+}
+.container {
+  padding: 1em;
+}
+
+.container-max {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.inner-container {
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.card {
+
+  position: relative;
+  padding: 1em; 
+}
+
+
+
+.secondary-text {
+  color: #999999;
+}
+
+/* =====================================
+                side-nav
+  ======================================*/
+.side-nav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  right: -200px;
+  background-color: #fff;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  padding: 1em;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+body.dark .side-nav {
+  background-color: #373549;
+}
+
+.side-nav .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+
+
+
+
+.side-nav .close-menu {
+  cursor: pointer;
+}
+
+.side-nav .user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.side-nav .user img {
+  width: 66px;
+  height: 66px;
+}
+
+.side-nav .user .name {
+  font-size: 1.2em;
+}
+
+.side-nav .nav-list {
+  list-style: none;
+}
+
+.side-nav .nav-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  font-size: 0.9em;
+  margin-bottom: 2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.side-nav .nav-list li.active {
+  font-weight: 700;
+}
+
+.side-nav .nav-list svg {
+  margin-right: 0.5em;
+}
+
+
+/* =====================================
+           nav bar (section user)
+  ======================================*/
+header .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+header .logo{
+  font-size: 1.1rem;
+  color:var(--black);
+}
+
+header .logo span{
+  color:var(--blue);
+}
+
+
+header .open-menu,
+.container label {
+  
+  display: none;
+}
+
+
+
+section.user .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+section.user img {
+  width: 50%;
+  border: 3px solid #ff9600;
+  border-radius: 50%;
+  padding: 0.2em;
+  margin-bottom: 0.5em;
+}
+
+section.user .name {
+  font-size: 1.4em;
+}
+
+section.user .secondary-text {
+  font-size: 0.9em;
+}
+
+section.user .nav-list {
+  list-style: none;
+}
+
+section.user .nav-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  font-size: 0.9em;
+  margin-bottom: 2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+
+section.user .nav-list li.active {
+  font-weight: 700;
+}
+
+section.user .nav-list svg {
+  margin-right: 0.5em;
+}
+
+
+
+/* =====================================
+               today's workout
+  ======================================*/
+
+
+section.today-workout h2 {
+  font-weight: 400;
+  font-size: 1.125em;
+  border-bottom: 1px solid #f5f5fb;
+  padding-bottom: 0.7em;
+  -webkit-transition: border-bottom-color 0.3s;
+  transition: border-bottom-color 0.3s;
+}
+
+
+/* =====================================
+               today's meals
+  ======================================*/
+
+.meal-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px;
+}
+
+
+.meal-time {
+  width: 30%;
+}
+
+.plus-sign {
+  font-size: 1.125rem;
+  padding: 3px;
+  padding-top: 6px;
+
+  float: right;
+  text-align: center;
+  margin: 10px;
+}
+
+#input-meal {
+  display: none;
+  transition: all step-end 500ms;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 5px;
+  box-sizing: border-box;
+  width: 50%;
+}
+
+input[type="text"]{
+  margin: 0 10px 0 50px;
+}
+
+
+
+
+section.workouts .meals {
+  padding: 0.5em 0 0.5em;
+  margin: 10px;
+}
+
+
+section.workouts .meals:last-child {
+  padding-bottom: 0;
+}
+
+section.workouts .meals hr {
+
+  margin: 0;
+  border-width: 0.01em;
+
+}
+
+section.workouts .plus-circle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #00ce93;
+  color: #fff;
+  font-size: 1.3em;
+  font-weight: 700;
+  border: 7px solid #f5f5fb;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: -0.7em;
+  margin-right: -0.5em;
+  cursor: pointer;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+}
+
+body.dark section.workouts .plus-circle {
+  border-color: #2c2b3b;
+}
+
+section.workouts p {
+  padding: 0.7em 0;
+  border-bottom: 1px solid rgba(86, 81, 81, 0.25);
+}
+
+section.timer h1 {
+  text-transform: uppercase;
+  font-size: 1.15em;
+  margin-bottom: 0.8em;
+}
+
+section.timer .num-exercises-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+/*=====================================
+              weight
+ =====================================*/
+ .weight-container{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 10px 10px 10px 0;
+ }   
+ 
+ input[type="number"]{
+   width: 35%;
+ }
+
+@media screen and (min-width: 650px) {
+  main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /*
+        layout
+         - user info expand full width
+         - next row is divided into two columns
+      */
+  }
+
+  main section.user {
+    width: 100%;
+  }
+
+  .breakpoint-1-50 {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  main section.user {
+    width: 20%;
+  }
+
+   .breakpoint-2-40 {
+    width: 40%;
+  }
+}
+
+  
+@media screen and (max-width: 900px){
+  section.user img {
+    width: 10%;
+        }
+}
+
+/*# sourceMappingURL=style.css.map */
+
+
+
+
+#qoute-paragraph {
+  font-size: 0.9em;
+}
+
+
+
+
+
+
+/* =====================================
+                Workout
+  ======================================*/
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box .button img {
+  width: 50vw;
+}
+
+/* =====================================
+                Workout popup
+  ======================================*/
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup ul {
+  list-style: none;
+  counter-reset: list-counter;
+  font-family: sans-serif;
+}
+
+.popup ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.popup ul li::before {
+  content: counter(list-counter);
+  counter-increment: list-counter;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #253b80;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  color: white;
+  margin-right: 8px;
+}
+
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup .close:hover {
+  color: #06D85F;
+}
+
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+/*=============================================
+              media query
+==============================================*/
+
+@media (max-width:769px){
+
+
+  .container label{
+    display: block;
+    cursor: pointer;
+  }
+  section.user .nav-list {
+  
+    position: absolute;
+    top:5%; left: 0;
+    width:100%;
+    background:#fff;
+    padding:10px 20px;
+    border-top: .1rem solid rgba(0,0,0,.2);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+    transform-origin: top;
+    transform: scaleY(0);
+    opacity: 0;
+    transition: .2s linear;
+  
+  }
+
+ 
+  header input:checked > section.user  .nav-list{
+    transform: scaleY(1);
+    opacity: 1;
+} 
+  }

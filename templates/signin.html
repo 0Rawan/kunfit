@@ -1,0 +1,56 @@
+{% extends "base-profile.html" %}
+{% block title %}Edit Profile{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{{ super() }}
+
+<style>
+   
+   
+    body {
+        background-image: linear-gradient(310deg, rgb(20, 23, 39) 0%, var(--blue) 100%);
+    }
+
+    .container {
+        margin: 7rem auto;
+    }
+
+    main {
+        height: 83vh;
+    }
+
+    header .logo {
+    font-size: 2rem;
+    }
+   
+</style>
+
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+           <!-- Tabs Titles -->
+           <h2 class="active"> Sign In </h2>
+           <a href="#signup" onclick="checkVisibility(1)">
+              <h2 class="inactive underlineHover">Sign Up </h2>
+           </a>
+
+           <!-- Icon -->
+           <div class="fadeIn first">
+              <img src="{{ url_for('static', filename = 'user.png') }}" id="icon" alt="User Icon" />
+           </div>
+
+           <!-- Login Form -->
+           <form class="log-form" action="http://127.0.0.1:5000/result" method="POST">
+              <input type="email" id="login" class="fadeIn second" name="email" placeholder="email">
+              <input type="password" id="password" class="fadeIn third" name="pass" placeholder="password">
+              <input type="submit" class="fadeIn fourth" value="Log In">
+           </form>
+        </div>
+     </div>
+
+</main>
+{% endblock %}

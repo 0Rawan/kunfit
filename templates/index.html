@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+<head>
+   <title>Kun Fit</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+<body>
+   <!--            header section start             -->
+   <header>
+      <a href="#" class="logo"><span>Kun</span>Fit</a>
+      <input type="checkbox" id="menu-bar" />
+      <label for="menu-bar" class="fas fa-bars"></label>
+      <nav class="navbar">
+         <a href="#home" onclick="checkVisibility(4)">home</a>
+         <a href="#signup" onclick="checkVisibility(2)">Signup</a>
+         <a href="#signin" onclick="checkVisibility(1)">Sign in</a>
+         <a href="{{url_for('signup')}}">be a trainer</a>
+         <a href="#contact">contact</a>
+      </nav>
+      <!--            header section ends             -->
+   </header>
+   <!--            HeroSection section start             -->
+   <section class='heroSection'>
+      <div class="content">
+         <!--<h3><span>OMO</span></h3>-->
+         <h3>Say hello to your private trainer</h3>
+         <p>Achive your fitness goals with a help from your personal trainer
+         </p>
+         <a class="btn" href="#trainers" onclick="checkVisibility(3)">Chose your trainer </a>
+      </div>
+      <img src="{{url_for('static', filename='images/tablet-pic.png')}}" alt="" />
+
+   </section>
+   <!--            HeroSection section ends           -->
+   <!--            Qoute section start                -->
+   <section class="qoute-section">
+      <div class="qoute">
+         <h2>
+            I don't believe you have to be better than everybody else.
+            I believe you have to be better than you ever thought you could be.
+         </h2>
+      </div>
+   </section>
+   <!--            Qoute section ends                 -->
+   <!--            Featuers section start             -->
+   <section>
+      <div class="about" id="about">
+         <div class="column">
+            <div class="image">
+               <img src="{{url_for('static', filename='images/trainers-list-pic.png')}}" alt="" />
+            </div>
+            <div class="content">
+               <h1 class="heading">Meet your personal trainer</h1>
+               <p>you can find the perfect trainer who can fit your needs, they will help to focus on your specific
+                  golas,
+                  when you reach them they will help you maintain your gains</p>
+               <p>once you have started you can access your meals and workouts plans anytime and anywhere,
+                  then you can track your daily progress
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="about" id="about">
+         <div class="column   ">
+            <div class="image">
+               <img src="{{url_for('static', filename='images/messages-pic.png')}}" alt="" />
+            </div>
+            <div class="content">
+               <h1 class="heading">Get feedback and ask questions</h1>
+               <p>Your personal trainer will make sure you don't have any problems with your plans, will encourge you
+                  to follow along your plans and guide you if you need any help.
+               </p>
+               <p>with our messaging system you're going to be able to ask your personal trainer all the questions you
+                  want
+                  and you will be able to get feedback on your work.
+               </p>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <div id="signin" class="overlay">
+      <a class="close" href="#Home" onclick="checkVisibility(1)">&times;</a>
+      <div class="wrapper fadeInDown">
+         <div id="formContent">
+            <!-- Tabs Titles -->
+            <h2 class="active"> Sign In </h2>
+            <a href="#signup" onclick="checkVisibility(1)">
+               <h2 class="inactive underlineHover">Sign Up </h2>
+            </a>
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+               <img src="{{ url_for('static', filename = 'user.png') }}" id="icon" alt="User Icon" />
+            </div>
+
+            <!-- Login Form -->
+            <form class="log-form" action="http://127.0.0.1:5000/result" method="POST">
+               <input type="email" id="login" class="fadeIn second" name="email" placeholder="email">
+               <input type="password" id="password" class="fadeIn third" name="pass" placeholder="password">
+               <input type="submit" class="fadeIn fourth" value="Log In">
+            </form>
+         </div>
+      </div>
+   </div>
+   <div id="signup" class="overlay">
+      <a class="close" href="#" onclick="checkVisibility(2)">&times;</a>
+      <div class="wrapper fadeInDown">
+         <div id="formContent">
+            <!-- Tabs Titles -->
+            <a href="#signin" onclick="checkVisibility(2)">
+               <h2 class="inactive underlineHover"> Sign In </h2>
+            </a>
+            <h2 class="active">Sign Up </h2>
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+               <img src="{{ url_for('static', filename = 'images/user-image.png') }}" id="icon" alt="User Icon" />
+            </div>
+
+            <!-- Login Form -->
+            <form class="log-form" action="http://127.0.0.1:5000/register" method="POST">
+               <input type="text" id="name" class="fadeIn second" name="name" placeholder="name">
+               <input type="email" id="login" class="fadeIn second" name="email" placeholder="email">
+               <input type="password" id="password" class="fadeIn third" name="pass" placeholder="password">
+               <input type="submit" class="fadeIn fourth" value="Sign Up">
+            </form>
+
+         </div>
+      </div>
+   </div>
+   <div id="trainers" class="overlay">
+      <a class="close" href="#" onclick="checkVisibility(3)">&times;</a>
+      <!-- Trainers list -->
+      <div class="wrapper trainers-list">
+         {%for value in trainers.items()%}
+         {% if "profile" in (value|list)[1]  %}
+         <div class="container1">
+            <div class="content trainers-list">
+               <div class="plan">
+                  <div class="music_img">
+                     <img src="{{url_for('static', filename = 'images/user-image.png')}}" alt="music image" />
+                  </div>
+
+                  <!--<img src="https://jayitis.github.io/Web-Dev/Frontend-Mentor/Images/icon-music.svg" alt="music icon" />-->
+                  <div class="price">
+                     <h6>Monthly Plan</h6>
+                     <p>FREE</p>
+                  </div>
+               </div>
+
+               <div class="text_content">
+                  <!-- <div class="rating">
+                     <i class="material-icons md-48" style="color: yellow;">star</i>
+                     <p>4.5</p>  
+   
+                     <i class="material-icons md-48">groups</i>
+                     <p>active trainees <span>4</span></p>
+                  </div> -->
+                  <h2>{{ (((value|list) [1])["profile"] ["firstName"]) }}
+                     {{ (((value|list) [1])["profile"]) ["lastName"]  }}</h2>
+                  <p>{{ (((value|list) [1])["profile"]) ["introduction"] }}
+                     <!-- <a href="{{url_for('trainer_profile', id = ((value|list) [0]))}}">Learn More </a> -->
+                  </p>
+                  <h6>Training Style</h6>
+                  <p>{{ (((value|list) [1])["profile"]) ["trainingStyle"]  }}</p>
+
+               </div>
+
+            </div>
+            <div class="button-wrapper">
+               <a href="{{url_for('payment', id = ((value|list) [0]))}}" class="PTP">Chose Trainer</a>
+               <a href="{{url_for('messages', id = ((value|list) [0]))}}" class="PTP CO">Send message</a>
+            </div>
+         </div>
+         {% endif %}
+         {% endfor %}
+
+
+
+
+
+      </div>
+   </div>
+   <!--            Featuers section ends             -->
+   <!--            QandA section start             -->
+   <section class='features'>
+
+      <h1 class="heading">Frequently Asked Questions</h1>
+      <div class="faqs">
+         <div class="faq-wrapper">
+            <div class="faq">
+               <div class="faq_question">What is <span class="logo"><span>Kun</span>Fit</span>?</div>
+               <div class="faq_answer">
+
+                  <span class="logo"><span>Kun</span>Fit</span> is service that helps you improve your life style that
+                  connects you with a personal
+                  trainers to help you achive your goal
+
+               </div>
+            </div>
+         </div>
+         <div class="faq-wrapper">
+            <div class="faq">
+               <div class="faq_question">How much dose <span class="logo"><span>Kun</span>Fit</span> cost?</div>
+               <div class="faq_answer">
+                  prcies vaires based on which trainer you're chosing></div>
+            </div>
+         </div>
+         <div class="faq-wrapper">
+            <div class="faq">
+               <div class="faq_question">Can I Cancel any time I want?</div>
+               <div class="faq_answer">
+                  you can get a full refund after 5 days from subscribing,
+                     and you can cancel any time without getting refund </div>
+               </div>
+            </div>
+            <div class="faq-wrapper">
+               <div class="faq">
+                  <div class="faq_question">Can more than one person use the same account?</div>
+                  <div class="faq_answer">trainer plans will be prepared based on one person information,
+                     although more than one person can use the same account with the same plans </div>
+               </div>
+            </div>
+            <div class="faq-wrapper">
+               <div class="faq">
+                  <div class="faq_question">Can kids use it too?</div>
+                  <div class="faq_answer">
+                     <p>currently <span class="logo"><span>Kun</span>Fit</span> is only for adlut older than 18 years
+                        and above</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </section>
+   <!--            Footer section start             -->
+   <div class="footer">
+
+
+      <h1 class="credit"> &copy; copyright @ 2021</h1>
+
+   </div>
+
+
+
+   <!--fontAwsome setup-->
+   <script src="https://kit.fontawesome.com/986ad651a5.js" crossorigin="anonymous"></script>
+
+   <script>
+      function checkVisibility(i) {
+         const overlay = document.getElementsByClassName("overlay")
+
+
+
+         if (i == 4)
+            document.documentElement.style.overflowY = "auto"
+         else {
+            overlayVisibility = window.getComputedStyle(overlay[i - 1], null).getPropertyValue("visibility")
+            console.log(overlayVisibility)
+            if (overlayVisibility == "hidden")
+               document.documentElement.style.overflowY = "hidden";
+            else
+               document.documentElement.style.overflowY = "auto";
+
+
+         }
+
+      }
+
+      function onclickBtn(btn) {
+         var btnId = btn.id
+         switch (btnId) {
+            case '1':
+         }
+      }
+
+
+      //faq accordion 
+      const accordion = document.getElementsByClassName('faq');
+
+      for (i = 0; i < accordion.length; i++) {
+         accordion[i].addEventListener('click', function () {
+            console.log("here")
+            this.classList.toggle('active')
+         });
+      }
+   </script>
+</body>
+
+</html>

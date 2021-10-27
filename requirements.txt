@@ -1,0 +1,6 @@
+Flask==2.0.2
+Pyrebase==3.0.27
+opencv-python==4.5.4.58
+firebase==3.0.1
+mediapipe==0.8.8.1
+gunicorn==20.1.0

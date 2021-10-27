@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html>
+   <meta content="width=device-width, initial-scale=1" name="viewport" />
+   <head>
+      <title>Flask app</title>
+      <!-- CSS Files -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+   </head>
+   <body>
+      <!--            header section start             -->	
+      <header>
+         <a href="#" class="logo"><span>best</span>App</a>
+         <input type="checkbox" id="menu-bar"/>
+         <label for="menu-bar" class="fas fa-bars"></label>
+         <nav class="navbar">
+            <a href="#home">home</a>
+            <a href="#features">features</a>
+            <a href="#about">about</a>
+            <a href="#review">review</a>
+            <a href="#pricing">pricing</a>
+            <a href="#contact">contact</a>
+         </nav>
+      </header>
+      <!--            header section ends             -->
+      <section>
+         <div class="box">
+            <a class="btn" href="#popup1">Start</a>
+           <!-- <a  href="#popup1"> <img src="{{url_for('static', filename='images/featuer1.jpg')}}"  alt=""/></a> -->
+                
+         </div>
+         <div id="popup1" class="overlay">
+            <div class="popup">
+               <h2>Here i am</h2>
+               <a class="close" href="#">&times;</a>
+               <div class="content">
+                  <ul>
+                     {% for key, value in workouts.items()  %}
+                     <li>{{key}}</li>
+                     {% endfor %}
+                  </ul>
+                  <form method="post" id="form1" action="{{url_for('todayWorkout')}}" >
+                     <!--to do change to input and change the css code for background-->
+                     <input type="submit"
+                     name="start" value="start" class="btn">
+                 </form>  
+               </div>
+            </div>
+         </div>
+         
+        
+      </section>
+      
+   </body>
+</html>
+

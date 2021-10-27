@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+   <head>
+      <title>Flask app</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/videoPlayer.css') }}">
+   </head>
+
+   <body>
+       <h3 class="heading"> video gallery</h3>
+       <div class="container">
+           <div class="main-video">
+               <video src="{{url_for('static', filename='images/Export/day1-1.mp4')}}" controls muted autoplay></video>
+               <h3 class="title">video title </h3>
+           </div>
+
+           <div class="video-list">
+            <div class="vid active">
+                <video src="{{url_for('static', filename='images/Export/day1-1.mp4')}}" controls muted autoplay></video>
+                <h3 class="title">video title </h3>
+            </div>
+               <div class="vid">
+                <video src="{{url_for('static', filename='images/Export/day1-2.mp4')}}" controls muted autoplay></video>
+                <h3 class="title">video title </h3>
+               </div>
+               <div class="vid">
+                <video src="{{url_for('static', filename='images/Export/day1-3.mp4')}}" controls muted autoplay></video>
+                <h3 class="title">video title </h3>
+               </div>
+               <div class="vid">
+                <video src="{{url_for('static', filename='images/Export/day1-4.mp4')}}" controls muted autoplay></video>
+                <h3 class="title">video title </h3>
+               </div>
+               <div class="vid">
+                <video src="{{url_for('static', filename='images/Export/day1-5.mp4')}}" controls muted autoplay></video>
+                <h3 class="title">video title </h3>
+               </div>
+               <div class="vid">
+                <video src="{{url_for('static', filename='images/Export/day1-6.mp4')}}" controls muted autoplay></video>
+                <h3 class="title">video title </h3>
+               </div>
+               <div class="vid">
+                <video src="{{url_for('static', filename='images/Export/day1-7.mp4')}}" controls muted autoplay></video>
+                <h3 class="title">video title </h3>
+               </div>
+
+           </div>
+       </div>
+
+       <script>
+           console.log('hello')
+           let mainVideo = document.querySelector('.main-video video')
+           let vidTitle = document.querySelector('.main-video .title')
+           let listVideo = document.querySelectorAll('.video-list .vid')
+           let listVideoPath = Array.from(listVideo).map(vid =>  vid.children[0].getAttribute('src'))
+          
+
+           listVideo.forEach(vid =>{
+               vid.onclick= () => {
+                $.post("/postmethod",{
+            jsdata: 1
+
+        })
+                   listVideo.forEach(video => video.classList.remove('active'))
+                   vid.classList.add('active')
+                   if(vid.classList.contains('active')){
+                       let src = vid.children[0].getAttribute('src')
+                       mainVideo.src = src
+                       let title = vid.children[1].innerHTML
+                       vidTitle.innerHTML = title
+                   }
+               }
+           })
+
+           mainVideo.addEventListener('ended',myHandler,false);
+           function myHandler(e) {
+               let i = [].indexOf.call(listVideoPath, mainVideo.getAttribute('src'))
+               if(i !== listVideoPath.length - 1){
+                listVideo.forEach(video => video.classList.remove('active'))
+                   listVideo[i+1].classList.add('active')
+                    mainVideo.src = listVideoPath[i+1]
+            
+               }   
+             
+               }
+               
+    
+       </script>
+
+
+
+
+   </body>
+
+
+
+</html>

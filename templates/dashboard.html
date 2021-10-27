@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block nav_list_user %}
+{% if trainerID is none%}
+<li>
+<a href="{{ url_for('trainers_list') }}"> 
+   <span class="iconify" data-inline="false" data-icon="clarity:logout-line" style="color: #4b62c1; font-size: 23px"></span>
+   chose trainer
+</a>
+</li>
+{% else %}
+
+<li>
+   <a href="{{ url_for('meal_plans') }}"> 
+   <span class="iconify" data-inline="false" data-icon="carbon:event-schedule"
+      style="color: #4b62c1; font-size: 23px"></span>
+   Meal Plans
+</li>
+<li>
+   <span class="iconify" data-inline="false" data-icon="carbon:event-schedule"
+      style="color: #4b62c1; font-size: 23px"></span>
+   workouts
+</li>
+{% endif%}
+
+
+
+{% endblock %}
+
+{% block content %}
+  <!-- workout of the day side card-->
+         <!-- to do chnage this to simple code-->
+         <div class="breakpoint-1-50 breakpoint-2-40">
+            <div class="container1 start-workout">
+               <h1>Workout videos</h1>
+               <div class="inner-container">
+                  <p id="qoute-paragraph">Wealth creation is an evolutionarily recent positive-sum game.
+                     It is all about who take the opportunity first.
+                  </p>
+                  <a class="btn" href="#popup1">Start</a>
+               </div>
+            </div>
+            <!-- today's meals -->
+            <section class="workouts">
+               <div class="container1">
+                  <h1>Food Tracker</h1>
+                  <div class="inner-container">
+                     <div class="meal-container">
+                        <h2 class="meal-time">Breakfast</h2>
+                        <input type="text" id="input-breakfast" placeholder="Enter your meal">
+                        <i class="fas fa-plus plus-sign" id="1" onclick="onclickBtn(this)"></i>
+                     </div>
+
+                     <hr>
+                     <div class="meals" id="breakfast-div">
+                     {% if meals is not none %}   
+                     {% for key, value in meals.items()  %}
+                     {% if "breakfast" in value %} 
+                     {% for v in (value["breakfast"])["meals"] %}
+                        <p>{{v}}</p>
+                     {% endfor %}
+                     {% endif %}
+                     {% endfor %}
+                     {% endif %}
+
+                     </div>
+
+                     <div class="meal-container">
+                        <h2 class="meal-time">Lunch</h2>
+                        <input type="text" id="input-lunch" placeholder="Enter your meal">
+                        <i class="fas fa-plus plus-sign" id="2" onclick="onclickBtn(this)"></i>
+                     </div>
+
+                     <hr>
+                     <div class="meals" id="lunch-div">
+                        {% if meals is not none %}   
+                        {% for key, value in meals.items()  %}
+                        {% if "lunch" in value %} 
+                        {% for v in (value["lunch"])["meals"]%}
+                           <p>{{v}}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                     </div>
+                     <div class="meal-container">
+                        <h2 class="meal-time">Dinner</h2>
+                        <input type="text" id="input-dinner" placeholder="Enter your meal">
+                        <i class="fas fa-plus plus-sign" id="3" onclick="onclickBtn(this)"></i>
+                     </div>
+
+                     <hr>
+                     <div class="meals" id="dinner-div">
+                        {% if meals is not none %}   
+                        {% for key, value in meals.items()  %}
+                        {% if "dinner" in value %} 
+                        {% for v in (value["dinner"])["meals"]%}
+                           <p>{{v}}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                     </div>
+                     <div class="meal-container">
+                        <h2 class="meal-time">Snacks</h2>
+                        <input type="text" id="input-snacks" placeholder="Enter your meal">
+                        <i class="fas fa-plus plus-sign" id="4" onclick="onclickBtn(this)"></i>
+                     </div>
+                     <hr>
+                     <div class="meals" id="snacks-div">
+                        {% if meals is not none %}   
+                        {% for key, value in meals.items()  %}
+                        {% if "snacks" in value %}
+                        {% for v in (value["snacks"])["meals"]%}
+                           <p>{{v}}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+            </section>
+         </div>
+         <!-- workout and wieght historychart-->
+         <div class="breakpoint-1-50 breakpoint-2-40">
+            <div class="container1">
+               <h1>Workout videos</h1>
+            <div class="inner-container" >
+               <label class="label label-success">Line Chart</label>
+               <div id="line-chart"></div>
+            </div>
+            </div>
+            <section>
+               <div class="container1">
+                  <h1>Workout videos</h1>
+                  <div class="inner-container">
+                     <p id="qoute-paragraph"> updating your wieght will help to track your progress </p>
+                     <div class="weight-container">
+                        <input type="number" id="input-wieght" placeholder="Enter your wieght">
+                        <i class="fas fa-plus plus-sign" id="5" onclick="onclickBtn(this)"></i>
+                     </div>
+                  </div>
+               </div>   
+            </section>
+         </div>
+         <div id="popup1" class="overlay">
+            <div class="popup">
+               <h2>Here i am</h2>
+               <a class="close" href="#">&times;</a>
+               <div class="content">
+                  <ul>
+                     {% for key, value in workouts.items()  %}
+                     <li>{{key}}</li>
+                     {% endfor %}
+                  </ul>
+                  <form method="post" id="form1" action="{{url_for('todayWorkout')}}">
+                     <!--to do change to input and change the css code for background-->
+                     <input type="submit" name="start" value="start" class="btn">
+                  </form>
+               </div>
+            </div>
+         </div>
+
+   {% endblock %}
+
+   {% block script %}
+
+    <!--morris setup-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    
+
+   <script>
+    var data = [{
+          y: '2014',
+          a: 50,
+          b: 90
+},
+       {
+          y: '2015',
+          a: 65,
+          b: 75
+       },
+       {
+          y: '2016',
+          a: 50,
+          b: 50
+       },
+       {
+          y: '2017',
+          a: 75,
+          b: 60
+       },
+       {
+          y: '2018',
+          a: 80,
+          b: 65
+       },
+       {
+          y: '2019',
+          a: 90,
+          b: 70
+       },
+       {
+          y: '2020',
+          a: 100,
+          b: 75
+       },
+       {
+          y: '2021',
+          a: 115,
+          b: 75
+       },
+       {
+          y: '2022',
+          a: 120,
+          b: 85
+       },
+       {
+          y: '2023',
+          a: 145,
+          b: 85
+       },
+       {
+          y: '2024',
+          a: 160,
+          b: 95
+       }
+    ]
+
+    config = {
+       data: data,
+       xkey: 'y',
+       ykeys: ['a', 'b'],
+       labels: ['Total Income', 'Total Outcome'],
+       fillOpacity: 0.6,
+       hideHover: 'auto',
+       behaveLikeLine: true,
+       resize: true,
+       pointFillColors: ['#ffffff'],
+       pointStrokeColors: ['black'],
+       lineColors: ['gray', 'red']
+    };
+
+
+    config.element = 'line-chart';
+    Morris.Line(config);
+
+    /****************************************************/
+
+    //add meal script
+
+    //get input boxes
+    const inputBreakfastBox = document.getElementById("input-breakfast");
+    const inputlLunchBox = document.getElementById("input-lunch");
+    const inputDinnerBox = document.getElementById("input-dinner");
+    const inputSnacksBox = document.getElementById("input-snacks");
+    //for wieght 
+    const inputWieghtBox = document.getElementById("input-wieght")
+
+    // make suree input boxes are hidden at first
+    inputBreakfastBox.style.display = "none"
+    inputlLunchBox.style.display = "none"
+    inputDinnerBox.style.display = "none"
+    inputSnacksBox.style.display = "none"
+
+
+    //get all the divs to show food (meals) in it
+    const mealBreakFast = document.getElementById("breakfast-div")
+    const mealLunch = document.getElementById("lunch-div")
+    const mealDinner = document.getElementById("dinner-div")
+    const mealSnacks = document.getElementById("snacks-div")
+
+
+    function onclickBtn(btn) {
+       var btnId = btn.id
+       switch (btnId) {
+          case '1':
+             addMealtoDiv(inputBreakfastBox, mealBreakFast, "breakfast")
+
+             break
+
+          case '2':
+             addMealtoDiv(inputlLunchBox, mealLunch, "lunch")
+             break
+
+          case '3':
+             addMealtoDiv(inputDinnerBox, mealDinner, "dinner")
+             break
+
+          case '4':
+             addMealtoDiv(inputSnacksBox, mealSnacks, "snacks")
+             break
+          case '5':
+             sendData('none','none',inputWieghtBox.value)
+             break   
+       }
+
+    }
+
+    function addMealtoDiv(inputMealBox, meal, mealTime) {
+       //create new p elemnt
+       const mealParagraph = document.createElement("p");
+       //if plus sign clicked and input box is shown
+       if (inputMealBox.style.display !== "none") {
+          //hide input meal box
+          inputMealBox.style.display = "none";
+          //if the inputed value is greater than zero
+          if (inputMealBox.value.length !== 0) {
+
+             mealParagraph.innerHTML = inputMealBox.value
+             meal.appendChild(mealParagraph)
+             sendData(mealTime, inputMealBox.value, 'none')
+
+             inputMealBox.value = ''
+          }
+
+       } else {
+          inputMealBox.style.display = "block";
+       }
+    }
+
+
+
+    /************************************************************/
+
+    // // change the width dynamicaly
+    // var one = document.getElementById("container1");
+    // var two = document.getElementById("card-container");
+    // style = window.getComputedStyle(one);
+    // wdt = style.getPropertyValue('width');
+    // two.style.width = wdt;
+
+
+    // send meals data 
+    function sendData(mealTime, meal, wieght) {
+       /* send info to python using ajax 
+        using the postmethod in (postmethod url
+        data :  the array index for the clicked workout and next workout
+        to send this item info to AiTrainer file to detect the pose and count the sets */
+       $.ajax({
+          url: '/dashboard',
+          type: 'POST',
+          data: {
+             mealTimeInfo: mealTime,
+             mealInfo: meal,
+             wieghtInfo: wieght
+          },
+          success: function (result) {
+             console.log("Result:");
+             console.log(result);
+          },
+          error: function (result) {
+             console.log(result);
+          }
+       });
+    }
+ </script>
+
+{% endblock %}

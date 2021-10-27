@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+{% block title %}Meal Planner{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/popup-form.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile-edit.css') }}">
+
+{{ super() }}
+
+<style>
+  .breakpoint-large {
+    width: 80%;
+  }
+
+  .breakpoint-large h1 {
+    font-size: 1rem;
+  }
+
+  .vid-container {
+    height: 90%;
+    overflow-y: auto;
+
+  }
+
+  .vid-gallery {
+
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+
+  .inner-container {
+    padding: 1rem 1rem 2rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+  }
+
+  .title-wrapper {
+    display: flex;
+  }
+
+  .button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button-wrapper.flexstart {
+    justify-content: flex-start;
+    width: max-content;
+
+    margin: 10px 5%;
+  }
+
+
+  .btn {
+    margin: 0 5px;
+    font-size: 14px;
+    padding: 0;
+    border-radius: 0px;
+    border-color: transparent;
+  }
+
+
+  .btn.btn-default {
+    background: #ebebeb;
+    color: #8f9096;
+  }
+
+  .btn.btn-primary {
+    background: #6c63ff;
+    color: white;
+  }
+
+
+
+
+  /*=======================================
+          meal planner inner content
+===========================================*/
+  .vid-nav-bar {
+
+    background-color: rgb(243, 243, 243);
+    width: 90%;
+    height: 20%;
+    margin: 0 auto 20px auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px lightgrey;
+  }
+
+
+
+  label {
+    margin: 0 10px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  input {
+    display: none;
+  }
+
+
+  label:hover {
+    color: gray;
+  }
+
+  .inner-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    transition: 0.3s;
+    object-fit: revert;
+  }
+
+  #check2:checked {
+    color: #000;
+  }
+
+  #check2:checked~.vid-gallery .family {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+    transform: 0.3s;
+  }
+
+  #check2:checked~.vid-gallery .place,
+  #check2:checked~.vid-gallery .kid,
+
+  #check3:checked~.vid-gallery .place,
+  #check3:checked~.vid-gallery .family,
+
+  #check4:checked~.vid-gallery .kid,
+  #check4:checked~.vid-gallery .family {
+
+    display: none;
+    transform: 0.3s;
+  }
+
+
+  .no-plans{
+    position: absolute;
+    left: 47%;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="breakpoint-large">
+  <div class="inner-container">
+
+    <div class="vid-nav-bar">
+      <label for="check1">All Plans </label>
+      {% if plans is not none %}
+      {% for topic in plans.items() %}
+      <label for={{topic[0]}}>{{topic[0]}}</label>
+      {% endfor %}
+      {% endif %}
+    </div>
+
+
+    <div class="vid-container">
+      <input type="radio" name="videos" id="check1" checked>
+      {% if plans is not none %}
+      {% for topic in plans.items() %}
+      <input type="radio" name="videos" id={{topic[0]}}>
+      {% endfor %}
+      {% endif %}
+
+      <div class="vid-gallery">
+
+        {% if plans is not none %}
+        {%for value in plans.items()%}
+        <div class="container1 {{value[0]}}">
+          <div class="title-wrapper">
+            <h1>{{value[0]}}</h1>
+          </div>
+          <div class="inner-container place">
+            <div class="meal-container">
+              <h2 class="meal-time">Breakfast</h2>
+            </div>
+
+            <hr>
+            <div class="meals" id="breakfast-div">
+              {% if "breakfast" in ((value|list)[1])['mealTime'] %}
+              {%for meal in ((value|list)[1])['mealTime']["breakfast"]["meals"]%}
+              <p> {{meal}}</p>
+              {%endfor%}
+              {% endif %}
+            </div>
+
+            <div class="meal-container">
+              <h2 class="meal-time">Lunch</h2>
+            </div>
+
+            <hr>
+            <div class="meals" id="lunch-div">
+              {% if "lunch" in ((value|list)[1])['mealTime'] %}
+              {%for meal in ((value|list)[1])['mealTime']["lunch"]["meals"]%}
+              <p> {{meal}}</p>
+              {%endfor%}
+              {% endif %}
+            </div>
+            <div class="meal-container">
+              <h2 class="meal-time">Dinner</h2>
+            </div>
+
+            <hr>
+            <div class="meals" id="dinner-div">
+              {% if "dinner" in ((value|list)[1])['mealTime'] %}
+              {%for meal in ((value|list)[1])['mealTime']["dinner"]["meals"]%}
+              <p> {{meal}}</p>
+              {%endfor%}
+              {% endif %}
+            </div>
+            <div class="meal-container">
+              <h2 class="meal-time">Snacks</h2>
+            </div>
+            <hr>
+            <div class="meals" id="snacks-div">
+              {% if "snacks" in ((value|list)[1])['mealTime'] %}
+              {%for meal in ((value|list)[1])['mealTime']["snacks"]["meals"]%}
+              <p> {{meal}}</p>
+              {%endfor%}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+        <div  class="no-plans">
+          <h1>there's no plans to be shown</h1>
+        </div>
+        {% endif %}
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div id="popup1" class="overlay">
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+
+      <!-- Icon -->
+      <div class="fadeIn first" style="margin:10px;">
+        <h5>Add week plan</h5>
+      </div>
+
+      <!-- Login Form -->
+      <form class="log-form" action="{{url_for('meal_planner')}}" method="POST">
+        <input type="text" id="weekPlan" class="fadeIn second" name="weekPlan"
+          placeholder="Week plan, example lose wieght">
+        <div class="form-group">
+          <input type="radio" name="gender" id="dot-1">
+          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot-3">
+          <label>Gender</label>
+          <div class="category" style="width: 100%;">
+            <label for="dot-1">
+              <span class="dot one"></span>
+              <span class="gender">Male</span>
+            </label>
+            <label for="dot-2">
+              <span class="dot two"></span>
+              <span class="gender">Female</span>
+            </label>
+            <label for="dot-3">
+              <span class="dot three"></span>
+              <span class="gender">Both</span>
+            </label>
+          </div>
+        </div>
+        <input type="submit" id="11" class="fadeIn fourth" onclick="onclickBtn(this)">
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

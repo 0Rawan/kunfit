@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+   <meta content="width=device-width, initial-scale=1" name="viewport" />
+   <head>
+      <title>Flask app</title>
+      <!-- CSS Files -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+   </head>
+   <body>
+
+    <div class="container">
+        <div id="to-do-app" class="to-do-list">
+            <h1>Food Tracker</h1>
+            <i id="clear-list" class="fa fa-trash-o" aria-hidden="true" title="Clear All"></i>
+            <span id="title-date" class="title-date">December 24, 2017</span>
+            <div class="tasker-container">
+                <ul id="tasks-ul">
+                </ul>
+            </div>
+            <div class="add-task-button">+</div>
+            <div id="task-container" class="task-container">
+                <div id="error-msg" class="error-msg">Has to be atleast 1 letter!</div>
+                <input type="text" id="task" placeholder="to-do">
+                <button id="add-task">+</button>
+            </div>
+        </div>
+    </div>
+
+
+   </body>
+
+</html>

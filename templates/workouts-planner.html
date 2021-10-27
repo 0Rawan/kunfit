@@ -1,0 +1,379 @@
+{% extends "base.html" %}
+{% block title %}Workout Planner{% endblock %}
+
+{% block head %}
+{{ super() }}
+
+<style>
+  .breakpoint-large {
+    width: 80%;
+  }
+
+  .breakpoint-large h1 {
+    font-size: 1rem;
+  }
+
+  .vid-container {
+    height: 90%;
+    overflow-y: auto;
+
+  }
+
+  .vid-gallery {
+
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+
+  .inner-container {
+    padding: 1rem 1rem 2rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+  }
+
+  .title-wrapper {
+    display: flex;
+  }
+
+  .button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button-wrapper.flexstart {
+    justify-content: flex-start;
+    width: max-content;
+
+    margin: 10px 5%;
+  }
+
+
+  .btn {
+    margin: 0 5px;
+    font-size: 14px;
+    padding: 0;
+    border-radius: 0px;
+    border-color: transparent;
+  }
+
+
+  .btn.btn-default {
+    background: #ebebeb;
+    color: #8f9096;
+  }
+
+  .btn.btn-primary {
+    background: #6c63ff;
+    color: white;
+  }
+
+
+
+
+  /*=======================================
+          meal planner inner content
+===========================================*/
+  .vid-nav-bar {
+
+    background-color: rgb(243, 243, 243);
+    width: 90%;
+    height: 20%;
+    margin: 0 auto 20px auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px lightgrey;
+  }
+
+
+
+  label {
+    margin: 0 10px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  input {
+    display: none;
+  }
+
+
+  label:hover {
+    color: gray;
+  }
+
+  .inner-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    transition: 0.3s;
+    object-fit: revert;
+  }
+
+  #check2:checked {
+    color: #000;
+  }
+
+  #check2:checked~.vid-gallery .family {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+    transform: 0.3s;
+  }
+
+  #check2:checked~.vid-gallery .place,
+  #check2:checked~.vid-gallery .kid,
+
+  #check3:checked~.vid-gallery .place,
+  #check3:checked~.vid-gallery .family,
+
+  #check4:checked~.vid-gallery .kid,
+  #check4:checked~.vid-gallery .family {
+
+    display: none;
+    transform: 0.3s;
+  }
+
+  /*========================================
+            popup
+  ========================================*/
+
+  #popup2 .popup {
+    width: 40%;
+  }
+
+  .popup .content form {
+    display: flex;
+    width: 100%;
+  }
+
+  .popup input[type="text"] {
+    display: block;
+    padding: 5px;
+    margin: 0 10px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  /*  ==================================
+               from
+    ==================================*/
+
+
+  .form-group {
+    margin: 1rem;
+  }
+
+  .form-group.small {
+    width: 40%;
+    margin-right: 3rem;
+  }
+
+  form label {
+    font-size: 18px;
+    color: #8f9096;
+    display: inline-block;
+    margin-bottom: .5rem;
+  }
+
+
+  /*=====================================
+                gender form
+  ======================================*/
+
+  .category {
+    display: flex;
+    width: 75%;
+    margin: 14px 0;
+    justify-content: space-between;
+  }
+
+
+  .category label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #4b62c1;
+  }
+
+  .category label .dot {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: #d9d9d9;
+    border: 5px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  #dot-1:checked~.category label .one,
+  #dot-2:checked~.category label .two,
+  #dot-3:checked~.category label .three {
+    background: #9b59b6;
+    border-color: #d9d9d9;
+  }
+
+  form input[type="radio"] {
+    display: none;
+  }
+
+  .upload {
+    margin-left: 1rem;
+    display: flex;
+  }
+
+  .upload input {
+    display: block;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="breakpoint-large">
+  <div class="inner-container">
+    <div class="button-wrapper flexstart">
+
+      <button type="submit" class="btn btn-primary btn-block">Male</button>
+      <button type="button" class="btn btn-default btn-block">Female</button>
+      <a href="#popup2" class="plus-sign" id="1" onclick="onclickBtn(this)">
+        <i style="margin-right: 10px;" class="fas fa-plus plus-sign"></i>
+      </a>
+
+
+    </div>
+
+    <div class="vid-nav-bar">
+      <label for="check1">All Muscles </label>
+      {% for topic in navbarList %}
+      <label for={{topic}}>{{topic}}</label>
+      {% endfor %}
+    </div>
+
+
+    <div class="vid-container">
+      <input type="radio" name="videos" id="check1" checked>
+      {% for topic in navbarList %}
+      <input type="radio" name="videos" id={{topic}}>
+      {% endfor %}
+
+
+
+      <div class="vid-gallery">
+
+
+        {%for i in range(x |int)%}
+        <div class="vid place">
+          <img src="{{ url_for('static', filename='images/featuer1.jpg') }}" alt="">
+        </div>
+
+        {% endfor %}
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+<div id="popup2" class="overlay">
+  <div class="popup">
+    <h2>Here i am</h2>
+    <a class="close" href="#">&times;</a>
+    <div class="content">
+      <form action="{{url_for('workout_planner')}}" method="POST" enctype=multipart/form-data> <div
+        class="form-group small">
+
+        <label for=workoutName>Workout Name</label>
+        <input type="text" class="form-control" id="workoutName" name="workoutName">
+
+    </div>
+    <div class="form-group small">
+
+      <label for=tragetMuscle>Target Muscle</label>
+      <input type="text" class="form-control" id="tragetMuscle" name="tragetMuscle">
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="radio" name="gender" id="dot-1">
+    <input type="radio" name="gender" id="dot-2">
+    <input type="radio" name="gender" id="dot-3">
+    <label>Gender</label>
+    <div class="category">
+      <label for="dot-1">
+        <span class="dot one"></span>
+        <span class="gender">Male</span>
+      </label>
+      <label for="dot-2">
+        <span class="dot two"></span>
+        <span class="gender">Female</span>
+      </label>
+      <label for="dot-3">
+        <span class="dot three"></span>
+        <span class="gender">Both</span>
+      </label>
+    </div>
+  </div>
+  <div class="upload">
+    <input type=file name=file>
+    <input type=submit id="11" onclick="onclickBtn(this)" value=Upload>
+  </div>
+
+  </form>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+  let Gridrange = 0
+  let isSuccess = false
+
+  function onclickBtn(btn) {
+    console.log("here1")
+    var btnId = btn.id
+    switch (btnId) {
+      case '1':
+        Gridrange++
+        console.log(Gridrange)
+        sendData(Gridrange)
+        break
+    }
+  }
+
+
+  function sendData(range) {
+    console.log("here")
+    console.log(range)
+    $.ajax({
+      url: "/workout-planner",
+      type: "POST",
+      data: {
+        gridRangeInfo: range
+      },
+      success: function (data) {
+        isSuccess = true
+        console.log("isSuccess" +isSuccess)
+      },
+          error: function (result) {
+             console.log(result);
+          }
+    });
+
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,136 @@
+
+
+<!DOCTYPE html>
+<html>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+   <head>
+      <title>Flask app</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+   </head>
+   <body>
+      <!--            header section start             -->	
+      <header>
+         <a href="#" class="logo"><span>best</span>App</a>
+         <input type="checkbox" id="menu-bar"/>
+         <label for="menu-bar" class="fas fa-bars"></label>
+         <nav class="navbar">
+            <a href="#home">home</a>
+            <a href="#features">features</a>
+            <a href="#about">about</a>
+            <a href="#review">review</a>
+            <a href="#pricing">pricing</a>
+            <a href="#contact">contact</a>
+         </nav>
+         <!--            header section ends             -->
+      </header>
+      <!--            HeroSection section start             -->	
+      <section  class='heroSection'>
+         <div class="content">
+            <h3>Your personal A.I coach <span>OMO</span></h3>
+            <p>OMO Your persoal A.I coach will create a ///lfndnfkndknfkndk fjdljfdjkf kjdkjd  sjdkjsldjdldsj ldsjksd kdjskj</p>
+         </div>
+         <div class="sign-in">
+            <form action="">
+               <h1 class="heading">Ready To Workout?</h1>
+               <div class="inputBox">
+                  <input type="email" required/>
+                  <label>email</label>
+               </div>
+               <div class="inputBox">
+                  <input type="password" name="password" required/>
+                  <label>Password</label>
+               </div>
+               <input type="submit" class="btn" value="Get Started"/>
+            </form>
+         </div>
+      </section>
+      <!--            HeroSection section ends             -->
+      <!--            Featuers section start             -->  
+      <section>
+         <div class="about" id="about">
+            <div class="column">
+               <div class="image">
+                  <img src="{{url_for('static', filename='images/featuer1.jpg')}}"  alt=""/>
+               </div>
+               <div class="content">
+                  <h1 class="heading">Easy And Perfect Solution</h1>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla placeat deserunt saepe repudiandae veniam soluta minima dolor hic aperiam iure.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, quaerat. Dolorem ratione saepe magni quo inventore porro ab voluptates eos, nam eius provident accusantium, quia similique est, repellendus et reiciendis.</p>
+               </div>
+            </div>
+         </div>
+         <div class="about" id="about">
+            <div class="column reverse">
+               <div class="image">
+                  <img src="{{url_for('static', filename='images/featuer2.jpg')}}"  alt=""/>
+               </div>
+               <div class="content">
+                  <h1 class="heading">Easy And Perfect Solution</h1>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla placeat deserunt saepe repudiandae veniam soluta minima dolor hic aperiam iure.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, quaerat. Dolorem ratione saepe magni quo inventore porro ab voluptates eos, nam eius provident accusantium, quia similique est, repellendus et reiciendis.</p>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!--            Featuers section ends             -->  
+      <!--            QandA section start             -->  
+      <section class='features'>
+
+      <h1 class="heading">Frequently Asked Questions</h1>
+      </section>
+          <!--            Footer section start             --> 
+        <div class="footer">
+
+            <div class="box-container">
+
+                <div class="box">
+                    <h3>about us</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet pariatur rerum consectetur architecto ad tempora blanditiis quo aliquid inventore a.</p>
+                </div>
+
+                <div class="box">
+                    <h3>quick links</h3>
+                    <a href="#">home</a>
+                    <a href="#">features</a>
+                    <a href="#">about</a>
+                    <a href="#">review</a>
+                    <a href="#">pricing</a>
+                    <a href="#">contact</a>
+                </div>
+
+                <div class="box">
+                    <h3>follow us</h3>
+                    <a href="#">facebook</a>
+                    <a href="#">instagram</a>
+                    <a href="#">pinterest</a>
+                    <a href="#">twitter</a>
+                </div>
+
+                <div class="box">
+                    <h3>contact info</h3>
+                    <div class="info">
+                        <i class="fas fa-phone"></i>
+                        <p> +123-456-7890 <br></br> +111-2222-333 </p>
+                    </div>
+                    <div class="info">
+                        <i class="fas fa-envelope"></i>
+                        <p> example@gmail.com <br></br> example@gmail.com </p>
+                    </div>
+                    <div class="info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p> mumbai, india - 400104 </p>
+                    </div>
+                </div>
+
+        </div>
+
+        <h1 class="credit"> &copy; copyright @ 2021 by mr. web designer </h1>
+
+    </div>
+
+
+    
+   </body>
+</html>
+
+

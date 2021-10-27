@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+<head>
+    <title>Flask app</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<style>
+    ul {
+        height: 100%;
+    }
+
+    main {
+        height: 100vh;
+    }
+
+
+    .breakpoint-big{
+        width: 50%;
+    }
+
+    .breakpoint-small{
+        width: 30%;
+    }
+
+
+     .inner-container {
+        height: 90%;
+    }
+
+    .revenu,
+    .nutration-plan {
+        height: 50vh;
+    }
+    .trianees,
+    .workout-videos {
+        height: 70vh;
+    }
+
+
+    /*=====================================================
+                    workout video navbar
+    ======================================================*/                
+    .vid-nav-bar {
+
+        background-color: rgb(243, 243, 243);
+        width: 90%;
+        height: 20%;
+        margin: 0 auto 20px auto;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 5px;
+        box-shadow: 3px 3px 5px lightgrey;
+    }
+
+
+
+   .vid-nav-bar label {
+    display: block;   
+    margin: 0 10px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+    input {
+        display: none;
+    }
+
+
+    label:hover {
+        color: gray;
+    }
+
+    .vid-container {
+        height: 70%;
+        overflow-y: auto;
+
+    }
+
+    .vid-gallery {
+
+        width: 90%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+    }
+
+    .vid {
+        border-radius: 10px;
+        box-shadow: 3px 3px 5px lightgrey;
+        cursor: pointer;
+
+    }
+
+    .vid img {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        transition: 0.3s;
+        object-fit: revert;
+    }
+
+    #check2:checked {
+        color: #000;
+    }
+
+    #check2:checked~.vid-gallery .family {
+        opacity: 1;
+        transform: scale(1);
+        position: relative;
+        transform: 0.3s;
+    }
+
+    #check2:checked~.vid-gallery .place,
+    #check2:checked~.vid-gallery .kid,
+
+    #check3:checked~.vid-gallery .place,
+    #check3:checked~.vid-gallery .family,
+
+    #check4:checked~.vid-gallery .kid,
+    #check4:checked~.vid-gallery .family {
+
+        display: none;
+        transform: 0.3s;
+    }
+
+
+
+    /*========================================
+                contacts section
+   =========================================*/
+
+    .contacts {
+        padding: 10px 0;
+        height: 90%;
+        overflow-y: auto;
+        box-sizing: border-box;
+        padding: 1em;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  cursor: pointer;
+
+    }
+
+    .pic {
+        width: 4rem;
+        height: 4rem;
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+    }
+
+    .contact {
+        position: relative;
+        margin-bottom: 1rem;
+        height: 4.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .contact .pic {
+        position: absolute;
+        left: 0;
+    }
+
+
+    .contact .name {
+        font-weight: 400;
+        margin-bottom: 0.125rem;
+    }
+
+    .contact .message,
+    .contact .seen {
+        font-size: 0.9rem;
+        color: #999;
+    }
+
+    .contact .name,
+    .contact .message,
+    .contact .seen {
+        margin-left: 5rem;
+        font-size: 0.9em;
+    }
+
+
+    .contact .badge {
+        position: absolute;
+        box-sizing: border-box;
+        width: 1.5rem;
+        height: 1.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+        padding-top: 0.125rem;
+        border-radius: 1rem;
+        top: 0;
+        left: 2.5rem;
+        background: #333;
+        color: white;
+    }
+
+    .contacts h2 {
+        margin: 0.5rem 0 1.5rem 5rem;
+    }
+
+    .contacts .fa-bars {
+
+        color: #999;
+        transition: color 200ms;
+    }
+
+    .contacts .fa-bars:hover {
+        color: #666;
+    }
+
+    .contacts .contact:last-child {
+        margin: 0;
+    }
+
+
+    /* pics */
+    .pic.stark {
+        background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/73/SMH_Mentor_6.png');
+    }
+
+    .pic.banner {
+        background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/4/4f/BruceHulk-Endgame-TravelingCapInPast.jpg');
+    }
+
+    .pic.thor {
+        background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/9/98/ThorFliesThroughTheAnus.jpg');
+    }
+
+    .pic.danvers {
+        background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/0/05/HeyPeterParker.png');
+    }
+
+    .pic.rogers {
+        background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/7c/Cap.America_%28We_Don%27t_Trade_Lives_Vision%29.png');
+    }
+
+
+   /*================================================
+                    Meal Planner
+   =================================================*/                  
+
+.plans-slider {
+   
+   
+   display: flex;
+   align-items: center;
+   overflow-x: auto;
+   -ms-overflow-style: none;  /* IE and Edge */
+   scrollbar-width: none;  /* Firefox */
+   height: 95%;
+}
+
+
+
+    .plans-slider .plan-container {
+
+    min-width: 33.33%;    
+  
+    position: relative;
+    left: 0;
+    transition: 0.5s;
+    height: 100%;
+    padding: 1rem;
+    }
+ 
+
+
+.plans-slider .plan-container .card{
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  height: 100%;}
+
+
+
+    .plans-slider::-webkit-scrollbar{
+			display: none;
+		}
+
+p .slider-button:hover {
+    background: #222;
+    color: white;
+}
+p .slider-button {
+    font-size: 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    color: #555;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    line-height: 19px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.plans-slider .plan-container .card p{
+    font-size: 14px;
+    color: gray;
+}
+
+.plans-slider hr{
+    margin-bottom: 0.5rem;
+}
+
+
+.plans-slider .plan-container .card p span{
+    font-size: 12px;
+    background-color: rgba(234, 238, 11, 0.862);
+    padding: 5px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.plus-sign{
+    padding: 0;
+    margin: 0;
+}
+
+.plans-slider .plan-container .card button{
+    display: block;
+      background-color: hsl(245, 75%, 52%);
+      font-size: 14px;
+      padding: 5px;
+      margin: 10px auto;
+      border-radius: 5px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      box-shadow: 8px 15px 20px hsla(245, 54%, 75%, 0.329);
+}
+
+/***/
+
+#myfirstchart{
+    height: 236px;
+     width: 250px;
+     margin: 0 auto;    
+    }
+
+
+    @media (max-width:1000px) {
+        .plans-slider .plan-container{
+         min-width: 50%;
+     }
+    
+}
+
+    @media  (max-width: 900px) {
+      
+    .breakpoint-small{
+        width: 50%;
+    }
+
+    .plus-sign{
+        font-size: 14px;
+    }
+    .trianees, .workout-videos {
+    height: 60vh;
+}
+
+.revenu, .nutration-plan {
+    height: 40vh;
+}
+
+.plans-slider{
+    height: 100%;
+}
+
+.card {
+    
+    padding: 0.5rem;
+}
+
+.plans-slider .plan-container .card button{
+    margin: 0 auto 5px auto;
+    font-size: 12px;
+}
+
+label {
+    margin: 0 5px;
+    font-size: 10px;
+}
+
+
+.vid img {
+    width: 80px;
+    height: 80px;
+}
+
+
+    .fa-2x {
+    font-size: 1.5em;
+    } 
+    .pic {
+    width: 3rem;
+    height: 3rem;
+    }
+
+    .contact .message, .contact .seen {
+    margin-left: 4.5rem;
+    }
+
+
+   
+}
+
+
+
+
+@media screen and (max-width: 740px) {
+
+    .breakpoint-big {
+    width: 100%;
+}
+
+    .breakpoint-small {
+    width: 100%;
+    display: flex;
+}
+
+
+label {
+    margin: 0px 10px;
+    font-size: 14px;
+}
+
+
+ #myfirstchart{
+        width: 300px;
+        height: 200px;
+        
+    }
+
+
+
+}
+
+
+@media screen and (max-width:420px){
+
+    .inner-container {
+    padding: 0.5rem;
+    }
+
+
+.plans-slider .plan-container .card{
+    padding: 0.5rem;
+    height: 90%;
+}
+
+.breakpoint-small {
+
+    flex-direction: column-reverse;
+}
+
+
+
+
+}
+
+@media screen and (max-width:370px) {
+    .plans-slider .plan-container{
+        min-width: 75%;
+    }
+
+    label {
+    margin: 0px 5px;
+    font-size: 10px;
+}
+
+}
+
+
+
+@media screen and (max-width:300px) {
+    #myfirstchart{
+        width: 220px;
+        height: 200px;
+        
+        
+    }
+    
+}
+
+</style>
+
+<body>
+    <!-- sidenav -->
+    <aside id="side-nav" class="side-nav">
+        <!-- user info -->
+        <div class="user">
+            <img src="./user-pic.png" alt="user picture" />
+            <div>
+                <p class="name">Anna Doe</p>
+                <p class="secondary-text">Fitness lover</p>
+            </div>
+        </div>
+        <!-- navigation -->
+        <ul class="nav-list">
+            <li>
+                <span class="iconify" data-inline="false" data-icon="carbon:user-avatar"
+                    style="color: #4b62c1; font-size: 23px"></span>
+                Profile
+            </li>
+            <li class="active">
+                <span class="iconify" data-inline="false" data-icon="carbon:dashboard"
+                    style="color: #4b62c1; font-size: 23px"></span>
+                Dashboard
+            </li>
+            <li>
+                <span class="iconify" data-inline="false" data-icon="carbon:event-schedule"
+                    style="color: #4b62c1; font-size: 23px"></span>
+                Messages
+            </li>
+            <li>
+                <span class="iconify" data-inline="false" data-icon="clarity:logout-line"
+                    style="color: #4b62c1; font-size: 23px"></span>
+                logout
+            </li>
+        </ul>
+    </aside>
+    <div class="container-max">
+        <!-- header -->
+        <header>
+            <div class="container">
+                <a href="./index.html" class="logo"><span class="red-text">Workout</span> Tracker</a>
+                <!-- displayed on small screen -->
+                <span id="open-menu" class="open-menu">
+                    <span class="iconify" data-inline="false" data-icon="jam:menu"
+                        style="font-size: 30px"></span></span>
+                <!-- displayed on large screen -->
+        </header>
+        <!-- main -->
+        <main>
+            <!-- user -->
+            <section class="user">
+                <div class="container">
+                    <img src="{{ url_for('static', filename='images/user-image.png')}}" alt="user picture" />
+                    <p class="name">Anna Doe</p>
+                    <p class="secondary-text">Fitness lover</p>
+                    <!-- navigation: displayed on large screen -->
+                    <ul class="nav-list">
+                        <li>
+                            <span class="iconify" data-inline="false" data-icon="carbon:user-avatar"
+                                style="color: #4b62c1; font-size: 23px"></span>
+                            Profile
+                        </li>
+                    
+                        <li>
+                            <span class="iconify" data-inline="false" data-icon="carbon:event-schedule"
+                                style="color: #4b62c1; font-size: 23px"></span>
+                            Dashboard
+                        </li>
+                        <form id="messagesForm" action="{{url_for('messages',id = contactId) }}" method="POST">
+                            <li onclick="openMessages()" class="active">
+                                <span class="iconify" data-inline="false" data-icon="carbon:dashboard"
+                                    style="color: #4b62c1; font-size: 23px"></span>
+                                Messages
+                            </li>
+                         </form>
+                        <li>
+                            <a href="{{ url_for('logout') }}">
+                            <span class="iconify" data-inline="false" data-icon="clarity:logout-line"
+                                style="color: #4b62c1; font-size: 23px"></span>
+                            logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="breakpoint-big">
+                <div class="nutration-plan container">
+                    <h1>nutration plans</h1>
+                    
+                    <div class="inner-container">
+                        <p>
+                            <span class="slider-button">&#139;</span>
+                            <span  class="slider-button">&#155;</span>
+                            <i class="fas fa-plus plus-sign" onclick="onclickBtn(this)"></i>
+                         </p>
+                        <div class="plans-slider">
+
+                            <div class="plan-container">
+
+                                <div class="card">
+                                    <h2>..... Plan</h2>
+                                    <hr  >
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> weeks</p>
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> meals</p>
+
+                                   <button>manage</button>
+                                </div>
+                                
+                            </div>
+
+                            <div class="plan-container">
+
+                                <div class="card">
+                                    <h2>..... Plan</h2>
+                                    <hr  >
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> weeks</p>
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> meals</p>
+
+                                   <button>manage</button>
+                                </div>
+                                
+                            </div>
+
+                            <div class="plan-container">
+
+                                <div class="card">
+                                    <h2>..... Plan</h2>
+                                    <hr  >
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> weeks</p>
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> meals</p>
+
+                                   <button>manage</button>
+                                </div>
+                                
+                            </div>
+
+                            <div class="plan-container">
+
+                                <div class="card">
+                                    <h2>..... Plan</h2>
+                                    <hr  >
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> weeks</p>
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> meals</p>
+
+                                   <button>manage</button>
+                                </div>
+                                
+                            </div>
+
+                            <div class="plan-container">
+
+                                <div class="card">
+                                    <h2>..... Plan</h2>
+                                    <hr  >
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> weeks</p>
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> meals</p>
+
+                                   <button>manage</button>
+                                </div>
+                                
+                            </div>
+
+                            <div class="plan-container">
+
+                                <div class="card">
+                                    <h2>..... Plan</h2>
+                                    <hr  >
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> weeks</p>
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> meals</p>
+
+                                   <button>manage</button>
+                                </div>
+                                
+                            </div>
+
+                            <div class="plan-container">
+
+                                <div class="card">
+                                    <h2>..... Plan</h2>
+                                    <hr  >
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> weeks</p>
+                                    <p  style="padding: 0.5rem 0;"><span>no.</span> meals</p>
+
+                                   <button>manage</button>
+                                </div>
+                                
+                            </div>
+                            
+                         
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="workout-videos container">
+                    <h1>Workout videos</h1>
+
+                    <div class="inner-container">
+                        <div class="vid-nav-bar">
+                            <label for="check1">All workouts </label>
+                            <label for="check2">workout 1</label>
+                            <label for="check3">workout 2</label>
+                            <label for="check4">workout 3</label>
+                            <i style="margin-right: 10px;" class="fas fa-plus plus-sign" onclick="onclickBtn(this)"></i>
+
+                        </div>
+
+
+                        <div class="vid-container">
+                            <input type="radio" name="videos" id="check1" checked>
+                            <input type="radio" name="videos" id="check2">
+                            <input type="radio" name="videos" id="check3">
+                            <input type="radio" name="videos" id="check4">
+                            
+
+                            <div class="vid-gallery">
+
+                                <div class="vid place">
+                                    <img src="{{ url_for('static', filename='images/featuer1.jpg') }}" alt="">
+                                </div>
+                                <div class="vid family">
+                                    <img src="{{ url_for('static', filename='images/featuer2.jpg') }}" alt="">
+                                </div>
+                                <div class="vid kid">
+                                    <img src="{{ url_for('static', filename='images/phone-pic.png') }}" alt="">
+                                </div>
+                                <div class="vid place">
+                                    <img src="{{ url_for('static', filename='images/featuer1.jpg') }}" alt="">
+                                </div>
+                                <div class="vid family">
+                                    <img src="{{ url_for('static', filename='images/featuer2.jpg') }}" alt="">
+                                </div>
+                                <div class="vid kid">
+                                    <img src="{{ url_for('static', filename='images/phone-pic.png') }}" alt="">
+                                </div>
+                                <div class="vid place">
+                                    <img src="{{ url_for('static', filename='images/featuer1.jpg') }}" alt="">
+                                </div>
+                                <div class="vid family">
+                                    <img src="{{ url_for('static', filename='images/featuer2.jpg') }}" alt="">
+                                </div>
+                                <div class="vid kid">
+                                    <img src="{{ url_for('static', filename='images/phone-pic.png') }}" alt="">
+                                </div>
+                                <div class="vid place">
+                                    <img src="{{ url_for('static', filename='images/featuer1.jpg') }}" alt="">
+                                </div>
+                                <div class="vid family">
+                                    <img src="{{ url_for('static', filename='images/featuer2.jpg') }}" alt="">
+                                </div>
+                                <div class="vid kid">
+                                    <img src="{{ url_for('static', filename='images/phone-pic.png') }}" alt="">
+                                </div>
+                                <div class="vid place">
+                                    <img src="{{ url_for('static', filename='images/featuer1.jpg') }}" alt="">
+                                </div>
+                                <div class="vid family">
+                                    <img src="{{ url_for('static', filename='images/featuer2.jpg') }}" alt="">
+                                </div>
+                                <div class="vid kid">
+                                    <img src="{{ url_for('static', filename='images/phone-pic.png') }}" alt="">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="breakpoint-small">
+                <div class="revenu container">
+                    <h1>Progress Chart</h1>
+
+                    <div class="inner-container">
+                        <div id="myfirstchart" ></div>
+                    </div>
+                </div>
+                <div class="trianees container">
+                    <h1>Subscribers</h1>
+
+                    <div class="contacts" id='contacts' style="padding: 1rem;">
+                        <div class="contact" onclick="openChat()">
+                            <div class="pic rogers">
+                            </div>
+                            <div class="badge">14</div>
+                            <div class="name">Steve Rogers</div>
+                            <div class="message">That is America's ass 🇺🇸🍑</div>
+                        </div>
+                        <div class="contact">
+                            <div class="pic stark">
+                            </div>
+                            <div class="name">Tony Stark</div>
+                            <div class="message">Uh, he's from space.</div>
+                        </div>
+                        <div class="contact">
+                            <div class="pic banner">
+                            </div>
+                            <div class="badge">1</div>
+                            <div class="name">Bruce Banner</div>
+                            <div class="message">There's an Ant-Man?</div>
+                        </div>
+                        <div class="contact">
+                            <div class="pic thor">
+                            </div>
+                            <div class="name">Thor Odinson</div>
+                            <div class="badge">3</div>
+                            <div class="message">I like this one</div>
+                        </div>
+                        <div class="contact">
+                            <div class="pic danvers">
+                            </div>
+                            <div class="badge">2</div>
+                            <div class="name">Carol Danvers</div>
+                            <div class="message">Hey Peter Parker, you got something for me?</div>
+                        </div>
+                    </div>
+
+                </div>
+                
+
+        </main>
+    </div>
+
+    
+    <!--fontAwsome setup-->
+   <script src="https://kit.fontawesome.com/986ad651a5.js" crossorigin="anonymous"></script>
+    <!-- morris setup-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <script>
+        //nav bar scripts
+        const messagesForm = document.getElementById('messagesForm')    
+        function openMessages() {
+            messagesForm.submit();
+         }
+
+
+        new Morris.Line({
+            // ID of the element in which to draw the chart.
+            element: 'myfirstchart',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: [{
+                    year: '2008',
+                    value: 20
+                },
+                {
+                    year: '2009',
+                    value: 10
+                },
+                {
+                    year: '2010',
+                    value: 5
+                },
+                {
+                    year: '2011',
+                    value: 5
+                },
+                {
+                    year: '2012',
+                    value: 20
+                }
+            ],
+            // The name of the data record attribute that contains x-values.
+            xkey: 'year',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['value'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['Value']
+        });
+
+
+
+
+    let span = document.getElementsByClassName('slider-button');
+    console.log(span)
+	let plan = document.getElementsByClassName('plan-container')
+	let plan_page = Math.ceil(plan.length/3);
+	let l = 0;
+	let movePer = 33.34;
+	let maxMove = 150;
+	// mobile_view	
+	let mob_view = window.matchMedia("(max-width: 768px)");
+	if (mob_view.matches)
+	 {
+	 	movePer = 100.36;
+	 	maxMove = 504;
+	 }
+
+	let right_mover = ()=>{
+		l = l + movePer;
+        console.log('here1')
+		if (plan == 1){l = 0; }
+		for(const i of plan)
+		{
+			if (l > maxMove){l = l - movePer;}
+			i.style.left = '-' + l + '%';
+            console.log('here2')
+		}
+
+	}
+	let left_mover = ()=>{
+		l = l - movePer;
+		if (l<=0){l = 0;}
+		for(const i of plan){
+			if (plan_page>1){
+				i.style.left = '-' + l + '%';
+			}
+		}
+	}
+	span[1].onclick = ()=>{right_mover();}
+	span[0].onclick = ()=>{left_mover();}
+    </script>
+</body>
+
+</html>

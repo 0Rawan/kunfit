@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<html>
+   <meta content="width=device-width, initial-scale=1" name="viewport" />
+   <head>
+      <title>Flask app</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   </head>
+   <body>
+      <!-- sidenav -->
+      <aside id="side-nav" class="side-nav">
+         <!-- user info -->
+         <div class="user">
+            <img src="./user-pic.png" alt="user picture" />
+            <div>
+               <p class="name">Anna Doe</p>
+               <p class="secondary-text">Fitness lover</p>
+            </div>
+         </div>
+         <!-- navigation -->
+         <ul class="nav-list">
+            <li>
+               <span
+                  class="iconify"
+                  data-inline="false"
+                  data-icon="carbon:user-avatar"
+                  style="color: #4b62c1; font-size: 23px"
+                  ></span>
+               Profile
+            </li>
+            <li class="active">
+               <span
+                  class="iconify"
+                  data-inline="false"
+                  data-icon="carbon:dashboard"
+                  style="color: #4b62c1; font-size: 23px"
+                  ></span>
+               Dashboard
+            </li>
+            <li>
+               <span
+                  class="iconify"
+                  data-inline="false"
+                  data-icon="carbon:event-schedule"
+                  style="color: #4b62c1; font-size: 23px"
+                  ></span>
+               Schedule
+            </li>
+            <li>
+               <span
+                  class="iconify"
+                  data-inline="false"
+                  data-icon="clarity:logout-line"
+                  style="color: #4b62c1; font-size: 23px"
+                  ></span>
+               logout
+            </li>
+         </ul>
+      </aside>
+      <div class="container-max">
+      <!-- header -->
+      <header>
+         <div class="container">
+         <a href="./index.html" class="logo"
+            ><span class="red-text">Workout</span> Tracker</a
+            >
+         <!-- displayed on small screen -->
+         <span id="open-menu" class="open-menu">
+         <span
+            class="iconify"
+            data-inline="false"
+            data-icon="jam:menu"
+            style="font-size: 30px"
+            ></span
+            ></span>
+         <!-- displayed on large screen -->
+      </header>
+      <!-- main -->
+      <main>
+         <!-- user -->
+         <section class="user">
+            <div class="container">
+               <img src="./user-pic.png" alt="user picture" />
+               <p class="name">Anna Doe</p>
+               <p class="secondary-text">Fitness lover</p>
+               <!-- navigation: displayed on large screen -->
+               <ul class="nav-list">
+                  <li>
+                     <span
+                        class="iconify"
+                        data-inline="false"
+                        data-icon="carbon:user-avatar"
+                        style="color: #4b62c1; font-size: 23px"
+                        ></span>
+                     Profile
+                  </li>
+                  <li class="active">
+                     <span
+                        class="iconify"
+                        data-inline="false"
+                        data-icon="carbon:dashboard"
+                        style="color: #4b62c1; font-size: 23px"
+                        ></span>
+                     Dashboard
+                  </li>
+                  <li>
+                     <span
+                        class="iconify"
+                        data-inline="false"
+                        data-icon="carbon:event-schedule"
+                        style="color: #4b62c1; font-size: 23px"
+                        ></span>
+                     Schedule
+                  </li>
+                  <li>
+                     <span
+                        class="iconify"
+                        data-inline="false"
+                        data-icon="clarity:logout-line"
+                        style="color: #4b62c1; font-size: 23px"
+                        ></span>
+                     logout
+                  </li>
+               </ul>
+            </div>
+         </section>
+         <!-- workout of the day side card-->
+         <!-- to do chnage this to simple code-->
+         <div class="breakpoint-1-50 breakpoint-2-40">
+            <div class="card">
+               <div id="card-container">
+                  <p id="qoute-paragraph" >Wealth creation is an evolutionarily recent positive-sum game. 
+                     It is all about who take the opportunity first.</p>
+                  <a class="btn" href="#popup1">Start</a>   
+               </div>
+            </div>   
+            <!-- today's workout -->
+            <section class="workouts">
+               <div id="container1">
+                  <h1>Food Tracker</h1>
+                  <div class="inner-container">
+                     <div class="meal-container">
+                        <h2 class="meal-time">Breakfast</h2>
+                        <input type="text" id="input-meal" placeholder="Enter your meal">
+                     </div>
+                     <i class="fas fa-plus plus-sign"  id="add-meal"></i>
+                     <hr>
+                     <div class="meals"  id="div1"></div>
+                     <div class="meal-container">
+                        <h2 class="meal-time">Launch</h2>
+                        <input type="text" id="input-meal" placeholder="Enter your meal">
+                     </div>
+                     <i class="fas fa-plus plus-sign"  id="add-meal"></i>
+                     <hr>
+                     <div class="meals"></div>
+                     <div class="meal-container">
+                        <h2 class="meal-time">Dinner</h2>
+                        <input type="text" id="input-meal" placeholder="Enter your meal">
+                     </div>
+                     <i class="fas fa-plus plus-sign"  id="add-meal"></i>
+                     <hr>
+                     <div class="meals"></div>
+                     <div class="meal-container">
+                        <h2 class="meal-time">Snacks</h2>
+                        <input type="text" id="input-meal" placeholder="Enter your meal">
+                     </div>
+                     <i class="fas fa-plus plus-sign"  id="add-meal"></i>
+                     <hr>
+                     <div class="meals"></div>
+                  </div>
+               </div>
+            </section>
+         </div>
+         <!-- workout and wieght historychart-->
+         <div class="breakpoint-1-50 breakpoint-2-40">
+            <div class="container">
+               <label class="label label-success">Line Chart</label>
+               <div id="line-chart"></div>
+            </div>
+         </div>
+      </main>
+      <!-- iconify -->
+      <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+      <!--morris setup-->
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+      <!--fontAwsome setup-->
+      <script src="https://kit.fontawesome.com/986ad651a5.js" crossorigin="anonymous"></script>
+      <!-- javascript -->
+      <script>
+         var data = [
+         { y: '2014', a: 50, b: 90},
+         { y: '2015', a: 65,  b: 75},
+         { y: '2016', a: 50,  b: 50},
+         { y: '2017', a: 75,  b: 60},
+         { y: '2018', a: 80,  b: 65},
+         { y: '2019', a: 90,  b: 70},
+         { y: '2020', a: 100, b: 75},
+         { y: '2021', a: 115, b: 75},
+         { y: '2022', a: 120, b: 85},
+         { y: '2023', a: 145, b: 85},
+         { y: '2024', a: 160, b: 95}
+         ]
+         
+         config = {
+         data: data,
+         xkey: 'y',
+         ykeys: ['a', 'b'],
+         labels: ['Total Income', 'Total Outcome'],
+         fillOpacity: 0.6,
+         hideHover: 'auto',
+         behaveLikeLine: true,
+         resize: true,
+         pointFillColors:['#ffffff'],
+         pointStrokeColors: ['black'],
+         lineColors:['gray','red']
+         };
+         
+         
+         config.element = 'line-chart';
+         Morris.Line(config);
+         
+         
+         //add meal script
+         const inputMealBox = document.getElementById("input-meal");
+         inputMealBox.style.display = "none"
+         
+         const addMealBtn = document.getElementById("add-meal");
+         const meal = document.getElementById("div1")
+         
+         
+         
+         
+         addMealBtn.onclick = function () {
+         console.log(inputMealBox.value.length)
+         const mealParagraph = document.createElement("p");
+         if (inputMealBox.style.display !== "none") {
+         inputMealBox.style.display = "none";
+         
+         if(inputMealBox.value.length !== 0){
+         mealParagraph.innerHTML = inputMealBox.value
+         meal.appendChild(mealParagraph)
+         inputMealBox.value = '' 
+         }
+         
+         } else {
+         inputMealBox.style.display = "block";
+         }
+         };
+         
+         // change the width
+         var one = document.getElementById("container1");
+         var two = document.getElementById("card-container");
+         style = window.getComputedStyle(one);
+         wdt = style.getPropertyValue('width');
+         two.style.width = wdt;
+      </script>
+   </body>
+</html>
+

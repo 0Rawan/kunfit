@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+<head>
+   <title>Flask app</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<style>
+    .breakpoint-big{
+        width: 50%;
+    }
+
+    .breakpoint-small{
+        width: 30%;
+    }
+</style>
+
+<body>
+   <!--            header section start             -->
+   <!-- sidenav -->
+   <aside id="side-nav" class="side-nav">
+      <!-- user info -->
+      <div class="user">
+         <img src="./user-pic.png" alt="user picture" />
+         <div>
+            <p class="name">Anna Doe</p>
+            <p class="secondary-text">Fitness lover</p>
+         </div>
+      </div>
+      <!-- navigation -->
+      <ul class="nav-list">
+         <li>
+            <span class="iconify" data-inline="false" data-icon="carbon:user-avatar"
+               style="color: #4b62c1; font-size: 23px"></span>
+            Profile
+         </li>
+         <li class="active">
+            <span class="iconify" data-inline="false" data-icon="carbon:dashboard"
+               style="color: #4b62c1; font-size: 23px"></span>
+            Dashboard
+         </li>
+         <li>
+            <span class="iconify" data-inline="false" data-icon="carbon:event-schedule"
+               style="color: #4b62c1; font-size: 23px"></span>
+            Schedule
+         </li>
+         <li>
+            <span class="iconify" data-inline="false" data-icon="clarity:logout-line"
+               style="color: #4b62c1; font-size: 23px"></span>
+            logout
+         </li>
+      </ul>
+   </aside>
+   <div class="container-max">
+      <!-- header -->
+      <header>
+         <div class="container">
+            <a href="./index.html" class="logo"><span class="red-text">Workout</span> Tracker</a>
+            <!-- displayed on small screen -->
+            <span id="open-menu" class="open-menu">
+               <span class="iconify" data-inline="false" data-icon="jam:menu" style="font-size: 30px"></span></span>
+            <!-- displayed on large screen -->
+      </header>
+      <!-- main -->
+    
+      <main class="today-workout">
+         <!-- user -->
+         <section class="user">
+            <div class="container">
+               <img src="{{ url_for('static', filename='images/user-image.png')}}" alt="user picture" />
+               <p class="name">Anna Doe</p>
+               <p class="secondary-text">Fitness lover</p>
+               <!-- navigation: displayed on large screen -->
+               <ul class="nav-list">
+                  <li>
+                     <span class="iconify" data-inline="false" data-icon="carbon:user-avatar"
+                        style="color: #4b62c1; font-size: 23px"></span>
+                     Profile
+                  </li>
+                  <li class="active">
+                     <span class="iconify" data-inline="false" data-icon="carbon:dashboard"
+                        style="color: #4b62c1; font-size: 23px"></span>
+                     Dashboard
+                  </li>
+                  <li>
+                     <span class="iconify" data-inline="false" data-icon="carbon:event-schedule"
+                        style="color: #4b62c1; font-size: 23px"></span>
+                     Schedule
+                  </li>
+                  <li>
+                     <span class="iconify" data-inline="false" data-icon="clarity:logout-line"
+                        style="color: #4b62c1; font-size: 23px"></span>
+                     logout
+                  </li>
+               </ul>
+            </div>
+         </section>
+         
+         <div class="breakpoint-big">
+            <!--get dict-keys from dictionary 
+                     convert dict_keys to list 
+                     get the first item in list as a title-->
+                     <h3 class="title">{{(workouts.keys() | list)[0]}} </h3>
+            <div class="main-video">
+               <video src="/static/{{workouts.squat[4]}}" controls muted autoplay></video>
+            </div>
+
+            <h3 class="title">Next Workouts</h3>
+            <div class="video-list">
+               <!-- key is the workout name (python dictionary key)
+                  value is the dictionary values-->
+               {% for key, value in workouts.items()  %}
+               <div class="vid">
+                  <video src="/static/{{value[4]}}"></video>
+                  <h3 class="title">{{key}} </h3>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+         <div class="breakpoint-small">
+            <h3 class="title">Live counter</h3>
+            <div class="web-video">
+               <!--"{{ url_for('video') }}"-->
+               <img class="web-cam " src="" width="100%" alt="video stream">
+            </div>
+            <h3 class="title">workout progress</h3>
+            <div class="timer">
+               <canvas id="canvas"></canvas>
+               <p id="timer-p">00:00:00</p>
+            </div>
+         </div>
+
+
+
+
+
+
+      </main>
+   </div>
+   <!-- iconify -->
+   <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+   <script>
+      let mainVideo = document.querySelector('.main-video video')
+      let vidTitle = document.querySelector('.main-video .title')
+      let listVideo = document.querySelectorAll('.video-list .vid')
+
+      let timer = document.getElementById("timer-p")
+
+      let listVideoPath = Array.from(listVideo).map(vid => vid.children[0].getAttribute('src'))
+      listVideo[0].classList.add('active')
+
+      //create workout stopwatch 
+      let seconds = 0,
+         minutes = 0,
+         hours = 0
+      //progress bar
+      let canva =  document.getElementById('canvas'),
+      c = canva.getContext('2d')
+      
+      let posX = canva.width / 2,
+      posY = canva.height / 2,
+      result = 0,
+      deegres = 0,
+      fps = 1
+      
+      onePercent = 360 / 100,000
+     
+
+     
+
+
+      //Define var to hold setInterval() function
+      let interval = null
+
+      //Define var to hold stopwatch status
+      let started = false
+
+      //start stopwatch
+      startStopwatch()
+
+      // add video on click 
+      listVideo.forEach((vid, index) => {
+         vid.onclick = () => {
+            // send clicked video index to python
+            sendData(index)
+
+
+            // remove active class from current all videos
+            listVideo.forEach(video => video.classList.remove('active'))
+            // add active class to clicked-on video
+            vid.classList.add('active')
+            //if clicked-on video has class active
+            if (vid.classList.contains('active')) {
+               // change the video src for the main video window to clicked-on video src
+               let src = vid.children[0].getAttribute('src')
+               mainVideo.src = src
+               let title = vid.children[1].innerHTML
+
+               vidTitle.innerHTML = title
+            }
+         }
+      })
+
+      // event listener play the next video if the mainvideo is ended
+      mainVideo.addEventListener('ended', myHandler, false);
+
+      function myHandler(e) {
+         //get the index of the mainvideo
+         let i = [].indexOf.call(listVideoPath, mainVideo.getAttribute('src'))
+         //if mainvideo is not the last video in the list
+         if (i !== listVideoPath.length - 1) {
+            // remove active class from current all videos
+            listVideo.forEach(video => video.classList.remove('active'))
+            //change the src for the mainvideo to the next video in the list
+            listVideo[i + 1].classList.add('active')
+            mainVideo.src = listVideoPath[i + 1]
+            //send the next video index to python
+            sendData(i + 1)
+         } else {
+            stopStopwatch()
+            resetStopwatch()
+         }
+
+      }
+      /***********************************************************/
+
+
+      //Stopwatch function (logic to determine when to increment next value, etc.)
+      function stopWatch() {
+         
+         seconds++
+         if(seconds<10 & minutes<10 & hours<10) timer.innerHTML = '0'+hours+':0'+minutes+':0' +seconds
+         else if(seconds>10 & minutes>10) timer.innerHTML = '0'+hours+':'+minutes+':'+seconds
+         else if(seconds>10 & minutes<10) timer.innerHTML = '0'+hours+':0'+minutes+':'+seconds
+         else timer.innerHTML = '0'+hours+':'+minutes+':0'+seconds
+         
+         arcMove()
+         //Logic to determine when to increment next value
+         if (seconds / 60 === 1) {
+            seconds = 0
+            minutes++
+            if(minutes<10 ) timer.innerHTML = '00:0'+minutes+':00' 
+            else timer.innerHTML = '00:'+ minutes+':00'
+
+
+            if (minutes / 60 === 1) {
+               minutes = 0
+               hours++
+            }
+
+         }
+
+      }
+
+
+      function startStopwatch() {
+         //if stopwatch is stopped start it
+         if (!started) {
+
+            //Start the stopwatch (by calling the setInterval() function)
+            interval = window.setInterval(stopWatch, 1000)
+            started = true
+
+         }
+
+      }
+
+      function stopStopwatch() {
+         //if stopwatch is running stop it
+         if (started) {
+
+            window.clearInterval(interval)
+            started = false
+
+         }
+      }
+
+
+      function resetStopwatch() {
+
+         console.log(hours + '.' + minutes + '.' + seconds)
+         sendDurtion(hours + '.' + minutes + '.' + seconds)
+
+         window.clearInterval(interval);
+         seconds = 0;
+         minutes = 0;
+         hours = 0;
+
+      }
+
+      /*******************/
+
+      function sendData(index) {
+         /* send info to python using ajax 
+          using the postmethod in (postmethod url
+          data :  the array index for the clicked workout and next workout
+          to send this item info to AiTrainer file to detect the pose and count the sets */
+         $.ajax({
+            url: '/today-workout',
+            type: 'POST',
+            data: {
+               info: index
+            },
+            success: function (result) {
+               console.log("Result:");
+               //console.log(result);
+            },
+            error: function (result) {
+               console.log(result);
+            }
+         });
+
+      }
+
+      function sendDurtion(workoutDuration) {
+         $.ajax({
+            url: '/today-workout',
+            type: 'POST',
+            data: {
+               duration: workoutDuration
+            },
+            success: function (result) {
+               console.log("Result:");
+               //console.log(result);
+            },
+            error: function (result) {
+               console.log(result);
+            }
+         });
+
+      }
+
+
+      //progress bar
+        
+       
+  function arcMove(){
+   result = onePercent * (seconds/60 *100);
+    c.lineCap = 'round';    
+    
+    var acrInterval = setInterval (function() {
+      deegres += 1;
+      c.clearRect( 0, 0, canva.width, canva.height );
+      
+
+      c.beginPath();
+      c.arc( posX, posY, 70, (Math.PI/180) * 270, (Math.PI/180) * (270 + 360) );
+      c.strokeStyle = '#b1b1b1';
+      c.lineWidth = '10';
+      c.stroke();
+
+      c.beginPath();
+      c.strokeStyle = '#3949AB';
+      c.lineWidth = '10';
+      c.arc( posX, posY, 70, (Math.PI/180) * 270, (Math.PI/180) * (270 + deegres) );
+      c.stroke();
+      if( deegres >= result )
+       clearInterval(acrInterval);
+       if(deegres==360) deegres = 0
+    }, fps);
+    
+  }
+  
+  
+
+   </script>
+</body>
+
+</html>

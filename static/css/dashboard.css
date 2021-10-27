@@ -1,0 +1,494 @@
+:root{
+  --black:#3c3563;
+  --blue:rgb(37, 150, 190);
+  --gradient:linear-gradient(310deg, var(--black) 0%, var(--blue) 100%);
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  padding: 1em;
+}
+
+
+.btn{
+  display: inline-block;
+  margin-top: 1rem;
+  padding:.8rem 3rem;
+  border-radius: 5rem;
+  background:var(--gradient);
+  font-size: 1.7rem;
+  color:#fff;
+  cursor: pointer;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+  transition: all .3s linear;
+}
+
+.btn:hover{
+  transform: scale(1.1);
+}
+
+/* media query breakpoints */
+body {
+  background-color: #f5f5fb;
+  color: #3c3563;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  left: 0;
+  -webkit-transition: left 0.3s, background-color 0.3s;
+  transition: left 0.3s, background-color 0.3s;
+}
+
+
+.secondary-text {
+  color: #999999;
+}
+
+body.dark .secondary-text {
+  color: #abaab2;
+}
+
+.orange-text {
+  color: #ff9600;
+}
+
+.blue-text {
+  color: #4b62c1;
+}
+
+.green-text {
+  color: #00ce93;
+}
+
+.red-text {
+  color: #fb4f5c;
+}
+
+.container-max {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =====================================
+              side-nav
+======================================*/
+.side-nav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  right: -200px;
+  background-color: #fff;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  padding: 1em;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+body.dark .side-nav {
+  background-color: #373549;
+}
+
+.side-nav .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+
+
+
+
+.side-nav .close-menu {
+  cursor: pointer;
+}
+
+.side-nav .user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.side-nav .user img {
+  width: 66px;
+  height: 66px;
+}
+
+.side-nav .user .name {
+  font-size: 1.2em;
+}
+
+.side-nav .nav-list {
+  list-style: none;
+}
+
+.side-nav .nav-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-size: 0.9em;
+  margin-bottom: 2em;
+  text-transform: uppercase;
+}
+
+.side-nav .nav-list li.active {
+  font-weight: 700;
+}
+
+.side-nav .nav-list svg {
+  margin-right: 0.5em;
+}
+
+
+/* =====================================
+              nav bar
+======================================*/
+header .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+header .logo {
+  font-size: 1.1em;
+  color: inherit;
+}
+
+header .open-menu {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 900px) {
+  header .open-menu {
+    display: none;
+  }
+}
+
+
+
+
+
+
+section.user .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+ 
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+section.user img {
+  border: 3px solid #ff9600;
+  border-radius: 50%;
+  padding: 0.2em;
+  margin-bottom: 0.5em;
+  width: 50%;
+}
+
+section.user .name {
+  font-size: 1.4em;
+}
+
+section.user .secondary-text {
+  font-size: 0.9em;
+}
+
+section.user .nav-list {
+  list-style: none;
+  /* hide nav list beneath user info
+     on small screen */
+  display: none;
+}
+
+section.user .nav-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-size: 0.9em;
+  margin-bottom: 2em;
+  text-transform: uppercase;
+}
+
+section.user .nav-list li.active {
+  font-weight: 700;
+}
+
+section.user .nav-list svg {
+  margin-right: 0.5em;
+}
+
+@media screen and (min-width: 900px) {
+  section.user .nav-list {
+    display: block;
+    margin-top: 3em;
+    -ms-flex-item-align: start;
+        align-self: flex-start;
+  }
+}
+
+
+
+
+@media screen and (min-width: 650px) {
+  main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    /*
+      layout
+       - user info expand full width
+       - next row is divided into two columns
+    */
+  }
+
+    
+  main section.user {
+    width: 100%;
+    
+  }
+  
+}
+
+@media screen and (min-width: 900px) {
+  main section.user {
+    width: 20%;
+    display: inline-flex;
+  }
+
+}
+/*# sourceMappingURL=style.css.map */
+
+
+/* card style */ 
+.card {
+
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  min-width: 0;
+  background: #fff;
+  padding: 1em; 
+}
+
+#qoute-paragraph{
+  font-size: 0.9em;
+}
+
+
+/* Add some padding inside the card container */
+#card-container {
+  padding: 2px 16px;
+}
+
+
+
+
+
+
+/*#######################
+        videoPlayer
+#########################*/
+
+
+
+
+
+
+
+
+
+.breakpoint-small :is(.web-video, .timer){
+
+    padding: 10px;
+    height: 35vh;
+    margin: 0  1rem;
+    
+  
+}
+
+:is(.breakpoint-small, .breakpoint-big) .title{
+  padding: 1rem;
+
+}
+
+
+
+.today-workout :is(.main-video, .video-list, .timer, .web-video){
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+
+.breakpoint-big .main-video video{
+    width: 100%;
+    border-radius: 5px;
+}
+
+.breakpoint-big .main-video .title{
+  text-align: center;
+  background:var(--gradient);
+  color:black;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 23px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.breakpoint-big .video-list {
+  display: flex;
+  overflow-x: scroll;
+  width: 100%;
+
+}
+
+.breakpoint-big .video-list::-webkit-scrollbar{
+  width: 7px;
+}
+
+.breakpoint-big .video-list::-webkit-scrollbar-track{
+  background: #ccc;
+  border-radius: 50px;
+}
+
+.breakpoint-big .video-list::-webkit-scrollbar-thumb{
+  background: #666;
+  border-radius: 50px;
+}
+
+.breakpoint-big .video-list .vid video{
+  width: 100px;
+  border-radius: 5px;
+}
+
+
+.breakpoint-big .video-list .vid {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #f7f7ff;
+  border-radius: 5px;
+  margin: 10px;
+  padding-right: 5px;
+  border: 1px solid rgb(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.breakpoint-big .video-list .vid:hover{
+  background: #eee;
+} 
+
+.breakpoint-big .video-list .vid.active{
+
+  background: var(--black);
+} 
+
+.breakpoint-big .video-list .vid .title{
+
+  color: #333;
+  font-size: 17px;
+} 
+.breakpoint-big .video-list .vid.active .title{
+
+ color: blue;
+} 
+
+
+
+.timer canvas{
+  width: 100%;
+  padding: 1rem;
+}
+
+.timer p{
+  margin: 0 auto;
+width: max-content;
+font-size: 24px;
+font-weight: 600;
+
+}

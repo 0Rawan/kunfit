@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+<head>
+   <title>Flask app</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<style>
+   section {
+      padding: 0 9%;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-top: 7.5rem;
+      padding-bottom: 8rem;
+   }
+
+   
+
+   @media screen and (min-width: 650px) {
+      main .breakpoint-1-50 {
+         width: 50%;
+      }
+
+   }
+
+   @media screen and (min-width: 900px) {
+
+      main .breakpoint-2-40 {
+         width: 40%;
+      }
+   }
+</style>
+
+<body>
+   <!--            header section start             -->
+   <header>
+      <a href="#" class="logo"><span>best</span>App</a>
+      <input type="checkbox" id="menu-bar" />
+      <label for="menu-bar" class="fas fa-bars"></label>
+      <nav class="navbar">
+         <a href="#home">home</a>
+         <a href="#features">features</a>
+         <a href="#about">about</a>
+         <a href="#review">review</a>
+         <a href="#pricing">pricing</a>
+         <a href="#contact">contact</a>
+      </nav>
+      <!--            header section ends             -->
+   </header>
+
+   <!-- to do chnage this to simple code-->
+   <div class="breakpoint-1-50 breakpoint-2-40">
+      <section>
+         {%for value in trainers.items()%}
+         <div class="container1">
+            <div class="content trainers-list">
+               <div class="plan">
+                  <div class="music_img">
+                     <img src="https://jayitis.github.io/Web-Dev/Frontend-Mentor/Images/illustration-hero.svg"
+                        alt="music image" />
+                  </div>
+
+                  <!--<img src="https://jayitis.github.io/Web-Dev/Frontend-Mentor/Images/icon-music.svg" alt="music icon" />-->
+                  <div>
+                     <h6>Annual Plan</h6>
+                     <p>$59.99/year</p>
+                  </div>
+                  <a href="">Change</a>
+               </div>
+
+               <div class="text_content">
+                  <div class="rating">
+                     <i class="material-icons md-48" style="color: yellow;">star</i>
+                     <p>4.5</p>
+   
+                     <i class="material-icons md-48">groups</i>
+                     <p>active trainees <span>4</span></p>
+                  </div>
+                  <h2>{{ (((value|list) [1])["profile"] ["firstName"]) }} 
+                     {{ (((value|list) [1])["profile"]) ["lastName"]  }}</h2>
+                  <p>{{ (((value|list) [1])["profile"]) ["introduction"] }} 
+                     <a href="{{url_for('trainer_profile', id = ((value|list) [0]))}}">Learn More </a>
+                  </p>
+               </div>
+               
+            </div>
+            <div class="button-wrapper">
+               <a href="{{url_for('trainer_profile', id = ((value|list) [0]))}}" class="PTP">Chose trainer</a>
+               <a href="{{url_for('messages', id = ((value|list) [0]))}}" class="PTP CO">Send message</a>
+            </div>
+         </div>
+         {% endfor %}
+      </section>
+
+
+   </div>
+</body>
