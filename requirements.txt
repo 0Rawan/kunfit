@@ -3,4 +3,4 @@ Pyrebase==3.0.27
 opencv-python
 firebase==3.0.1
 mediapipe==0.8.8.1
-gunicorn
+gunicorn==20.1.0
