@@ -849,5 +849,4 @@ def get_uploaded_file(UPLOAD_FOLDER):
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 if __name__=="__main__":
-    app.run(debug=True)
-    #app.run()
+    app.run()
