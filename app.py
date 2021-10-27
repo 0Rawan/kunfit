@@ -7,12 +7,11 @@ from re import S, split
 from flask import Flask, render_template, Response, request, redirect, url_for, session, flash
 from pyrebase.pyrebase import Storage
 from werkzeug.utils import secure_filename
-#from flask_ngrok import run_with_ngrok
 from datetime import datetime
 import pyrebase
 
 
-from AITrianer import generate_frames, releaseWebCam
+#from AITrianer import generate_frames, releaseWebCam
 from firebase import firebase
 
 
