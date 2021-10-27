@@ -118,7 +118,7 @@
            </div>
 
            <!-- Login Form -->
-           <form class="log-form" action="http://127.0.0.1:5000/register-trainer" method="POST">
+           <form class="log-form" action="{{url_for('register_trainer')}}" method="POST">
               <input type="email" id="login" class="fadeIn second" name="email" placeholder="email">
               <input type="password" id="password" class="fadeIn third" name="pass" placeholder="password">
               <input type="submit" class="fadeIn fourth" value="Sign Up">
