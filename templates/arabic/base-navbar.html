@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+<head>
+    {% block head %}
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   {% endblock %}
+
+
+</head>
+
+<body>
+    <!--            header section start             -->
+    <header>
+       <a href="#" class="logo"><span>best</span>App</a>
+       <input type="checkbox" id="menu-bar" />
+       <label for="menu-bar" class="fas fa-bars"></label>
+       <nav class="navbar">
+          <a href="#home">home</a>
+          <a href="#features">features</a>
+          <a href="#about">about</a>
+          <a href="#review">review</a>
+          <a href="#pricing">pricing</a>
+          <a href="#contact">contact</a>
+       </nav>
+       <!--            header section ends -->
+    </header>
+ 
+       {% block content %}
+         
+       {% endblock %}
+ 
+ 
+        <!--fontAwsome setup-->
+    <script src="https://kit.fontawesome.com/986ad651a5.js" crossorigin="anonymous"></script>
+    <!-- javascript -->
+ 
+    {% block script %}
+    {% endblock %}
+ </body>

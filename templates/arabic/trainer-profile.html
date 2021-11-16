@@ -1,0 +1,846 @@
+{% extends "base-profile.html" %}
+{% block title %}Edit Profile{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <style>
+
+       /* =====================================
+                Content Boxes
+  ======================================*/
+
+  .content-box-lg {
+    padding: 120px 0;
+  }
+
+  .container,
+  .container1 {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    background-color: white;
+    margin-top: 6rem;
+    padding-top: 0.5rem;
+  }
+
+  .container1 {
+    margin: 20px 7%;
+    padding: 0 30px;
+
+  }
+
+  .container.top{
+    margin:7rem auto 0 auto ;
+  }
+
+  .wrapper.trainers-list {
+    overflow: scroll;
+    height: 520px;
+    float: left;
+    padding-top: 85px;
+
+  }
+
+
+
+        /*##############################################
+                       topSection
+    ###############################################*/
+  section {
+    padding: 0 9%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-top: 7.5rem;
+    padding-bottom: 8rem;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .wrapper.trainers-list::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .wrapper.trainers-list::-webkit-scrollbar-track {
+    background: #ccc;
+    border-radius: 50px;
+  }
+
+  .wrapper.trainers-list::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 50px;
+  }
+
+
+
+  img {
+    object-fit: cover;
+    width: 130px;
+    height: 130px;
+  }
+
+  .plan-sm {
+    display: flex;
+
+    flex-direction: row;
+  }
+
+  .text_content,
+  .avrage-rating {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 14px;
+  }
+
+  .text_content h2 {
+    color: hsl(223, 47%, 23%);
+    font-size: 20px;
+    line-height: 1.5rem;
+    margin-left: 0;
+  }
+
+  .text_content p {
+    line-height: 1.5;
+    color: rgba(153, 153, 153, 0.979);
+    font-size: 15px;
+    text-align: initial
+  }
+
+  .plan {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: hsl(225, 100%, 98%);
+    border-radius: 15px;
+    margin: 10px;
+    padding: 23px;
+
+  }
+
+  .plan h6 {
+    font-size: larger;
+    font-weight: 900;
+    color: hsl(223, 47%, 23%);
+  }
+
+
+
+  .plan p,
+  .container1 .text_content h6,
+  .rating p,
+  .rating-container p,
+  .resume-content p {
+    color: rgba(153, 153, 153, 0.979);
+    font-size: 16px;
+  }
+
+  .PTP {
+    display: block;
+    background-color: hsl(245, 75%, 52%);
+    font-size: 14px;
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+    font-weight: 500;
+    box-shadow: 8px 15px 20px hsla(245, 54%, 75%, 0.329);
+  }
+
+  .PTP.CO {
+
+    background-color: hsl(240, 94%, 81%);
+    white-space: pre;
+  }
+
+  .payment-options {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin: 30px 30px 0 50px;
+  }
+
+  .rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 15px;
+    width: 80%;
+  }
+
+
+  .rating i,
+  .rating p {
+    margin: 0 10px 0 10px;
+
+  }
+
+  .rating i:first-of-type {
+    margin-left: 0;
+  }
+
+  .container1 .text_content h6 {
+    margin: 15px 0;
+  }
+
+
+
+  /*===========================================
+                    profile-navbar
+   =============================================*/
+
+  .profile-navbar {
+    width: 100%;
+    padding: 0 9%;
+    float: left;
+    background-color: white;
+    border-top: 1px solid #f0f0f0;
+
+
+  }
+
+  .profile-navbar li {
+    display: inline-block;
+    padding: 15px;
+  }
+
+  .profile-navbar li a {
+    text-align: center;
+    color: gray;
+    font-size: 1.7rem;
+  }
+
+
+  /*===============================================
+                    about section
+  =================================================*/
+
+  .container1 .text_content {
+    padding-top: 32px;
+    margin: 15px;
+    width: 100%;
+  }
+
+
+  .container1 .text_content h2 {
+    margin-top: 5px;
+    padding-bottom: 1rem;
+  }
+
+  .container1 .text_content p,
+  .container1 .text_content h6 {
+    font-weight: 400;
+  }
+
+
+  .container1 .text_content p {
+    color: hsl(223, 47%, 23%);
+    font-size: 14px;
+  }
+
+
+  /*===============================================
+                    reviews section
+  =================================================*/
+
+  .container1.reviews {
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .container1.reviews .text_content {
+    width: max-content;
+    border-right: 1px solid #f0f0f0;
+
+
+  }
+
+  .container1.reviews .avrage-rating,
+  .star-rating {
+    width: 100%;
+  }
+
+  .container1.reviews .avrage-rating h3 {
+    font-weight: 700;
+    font-size: 62px;
+    line-height: 56px;
+    width: 100%;
+  }
+
+  .loder-ratimg {
+    display: inline-block;
+    padding-top: 30px;
+    width: 40%;
+
+
+  }
+
+  .rating-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+
+  }
+
+  .rating-container p {
+
+    font-size: 14px;
+  }
+
+
+  .rating-verbose,
+  .rating-verbose-2,
+  .rating-verbose-3,
+  .rating-verbose-4,
+  .rating-verbose-5 {
+    background: #F5F5F5;
+    border-radius: 13px;
+    height: 18px;
+    width: 97%;
+    padding: 3px;
+    margin: 5px 0px 3px 0px;
+  }
+
+  .rating-verbose:after,
+  .rating-verbose-2:after,
+  .rating-verbose-3:after,
+  .rating-verbose-4:after,
+  .rating-verbose-5:after {
+    content: '';
+    display: block;
+    background: #fdc425;
+    width: 80%;
+    height: 100%;
+    border-radius: 9px;
+  }
+
+  .rating-verbose-2:after {
+    width: 60%;
+  }
+
+  .rating-verbose-3:after {
+    width: 40%;
+  }
+
+  .rating-verbose-4:after {
+    width: 20%;
+  }
+
+  .rating-verbose-5:after {
+    width: 10%;
+  }
+
+
+  /*====================================
+                reviews-comments
+ =======================================*/
+  .container1.reviews.comment {
+    margin-top: 0;
+    margin-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 32px;
+
+  }
+
+  .container1.container1.reviews .text_content h2{
+    width: 100%;
+  }
+
+  .container1.reviews.comment .text_content {
+    margin: 0;
+  }
+
+  .user-img img {
+    height: 80px;
+    width: 80px;
+    border: 1px solid blue;
+    border-radius: 50%;
+  }
+
+  .user-img-part {
+    width: 30%;
+    float: left;
+    padding-top: 32px;
+  }
+
+  .user-img {
+    width: 100%;
+  }
+
+  .user-text {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 5px;
+  }
+
+  .user-text h4,
+  .user-text p {
+    margin: 0px 0px 5px 0px;
+  }
+
+  .user-text p {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .user-text h4,
+  .user-text span {
+    color: #B3B5B4;
+  }
+
+  .container1 .text_content .user-text h2 {
+    padding: 0;
+  }
+
+  /*===============================================
+                    resume section
+  =================================================*/
+  .resume-content {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding-bottom: 16px;
+  }
+
+  .container1.resume .text_content h6 {
+    color: #384047;
+  }
+
+  .text_content .resume-content p {
+    padding-right: 12px;
+    color: #6f757b;
+    font-size: 14px;
+    align-self: center;
+  }
+
+  .text_content .resume-content p:nth-child(even) {
+    width: 60%;
+    padding-left: 16px;
+  }
+
+
+    /* =====================================
+                Footer
+  ======================================*/
+
+  .footer{
+    padding-top: 3rem;
+    background: url_for('static', filename = 'images/footer-bg.png')no-repeat; 
+    background-size: cover;
+    background-position: center;
+    margin-top: 8rem;
+  }
+
+  .footer .box-container{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .footer .box-container .box{
+    flex:1 1 25rem;
+    margin:2rem;
+  }
+
+  .footer .box-container .box h3{
+    font-size: 2.5rem;
+    padding:1rem 0;
+    color:#fff;
+    text-decoration: underline;
+    text-underline-offset: 1rem;
+  }
+
+  .footer .box-container .box p{
+    font-size: 1.5rem;
+    padding:.5rem 0;
+    color:#eee;
+  }
+
+  .footer .box-container .box a{
+    display: block;
+    font-size: 1.5rem;
+    padding:.5rem 0;
+    color:#eee;
+  }
+
+  .footer .box-container .box a:hover{
+    text-decoration: underline;
+  }
+
+  .footer .box-container .box .info{
+    display: flex;
+    align-items: center;
+  }
+
+  .footer .box-container .box .info i{
+    margin:.5rem 0;
+    margin-right: 1rem;
+    border-radius: 50%;
+    background:#fff;
+    color:var(--pink);
+    font-size: 1.5rem;
+    height:4.5rem;
+    width:4.5rem;
+    line-height: 4.5rem;
+    text-align: center;
+  }
+
+  .footer .credit{
+    font-size: 2rem;
+    font-weight: normal;
+    letter-spacing: .1rem;
+    color:#fff;
+    border-top: .1rem solid #fff5;
+    padding:2.5rem 1rem;
+    text-align: center;
+  }
+
+
+
+  @media (max-width:768px) {
+
+
+    header label {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    header .navbar {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      padding: 1rem 2rem;
+      border-top: .1rem solid rgba(0, 0, 0, .2);
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+      transform-origin: top;
+      transform: scaleY(0);
+      opacity: 0;
+      transition: .2s linear;
+    }
+
+    header .navbar a {
+      display: block;
+      margin: 2rem 0;
+      font-size: 2rem;
+    }
+
+  }
+
+
+
+
+  @media (max-width: 650px) {
+    a{
+      font-size: 1rem;
+    }
+    .container.top {
+      flex: 1;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .text_content {
+      flex: 4;
+    }
+
+    .plan {
+      flex: 1;
+    }
+
+    .payment-options {
+      flex-basis: 100%;
+      padding: 0 10%;
+      margin-top: 15px;
+    }
+
+    .text_content .resume-content p:nth-child(2n) {
+      width: 75%;
+    }
+  }
+
+
+  @media (max-width:550px) {
+    .container1 {
+      padding: 0px 10px;
+    }
+
+    
+
+    .text_content{
+      padding: 14px;
+    }
+    .text_content h2 {
+      font-size: 15px;
+      margin-right: 0;
+     
+    }
+    .container1 .text_content h6{
+      font-size: 12px;
+    }
+
+   .container.top.text_content p {
+    
+    font-size: 14px;
+    }
+
+    .plan p,
+     .container1 .text_content h6,
+      .rating p, .rating-container p,
+       .resume-content p,
+       .text_content .resume-content p{
+      font-size: 12px;
+
+    }
+
+    .PTP{
+      font-size: small;
+    }
+
+    .container1 .text_content {
+    padding-top: 16px;
+    }
+
+    .loder-ratimg {
+    
+    width: 50%;
+
+    }
+    .container1.reviews .avrage-rating h3 {
+    
+    font-size: 40px;
+    }
+
+
+  }
+    </style>
+
+{% endblock %}  
+
+{% block content %}
+
+  <!--             Top section starts                -->
+  <div style="display: flex; flex-direction: column; background: white;">
+    <div class="container top">
+
+      <div class="plan">
+        <div class="music_img">
+          <img src="https://jayitis.github.io/Web-Dev/Frontend-Mentor/Images/illustration-hero.svg" alt="music image" />
+        </div>
+
+        <div>
+          <h6>Annual Plan</h6>
+          <p>$59.99/year</p>
+        </div>
+        <a href="">Change</a>
+      </div>
+      <div class="text_content">
+        <div class="rating">
+          <i class="material-icons md-48" style="color: #fdc425;;">star</i>
+          <p>4.5</p>
+
+          <i class="material-icons md-48">groups</i>
+          <p>active trainees <span>4</span></p>
+        </div>
+
+
+
+
+        <h2>{{firstName}} {{lastName}}</h2>
+        <p> {{bio}}</p>
+      </div>
+
+
+
+
+      <div class="payment-options">
+        <a href="" class="PTP">Subscribe</a>
+        <a href="" class="PTP   CO">Send message</a>
+      </div>
+    </div>
+    <nav>
+      <ul class="profile-navbar">
+        <li><a href="#about">About</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#resume">Resume</a></li>
+      </ul>
+    </nav>
+  </div>
+  <!--             about section starts                -->
+  <div id="about" class="container1">
+    <div class="text_content">
+      <h2>Order Summary</h2>
+      <div class="hr-line"></div>
+      <h6>Background verification</h6>
+      <div>tags</div>
+      <h6>Introduction</h6>
+      <p>{{intro}}</p>
+      <h6>Training Style</h6>
+      <p>{{training}}</p>
+      <h6>Languages</h6>
+      <div>tags</div>
+    </div>
+  </div>
+
+  <!--             reviews section starts                -->
+  <div id="reviews" class="container1 reviews">
+
+    <div class="text_content">
+      <h2>What trainees say</h2>
+
+
+      <div class="avrage-rating">
+        <h3>5</h3>
+      </div>
+      <div class="star-rating">
+        <i class="material-icons md-24" style="color: #fdc425;">star</i>
+        <i class="material-icons md-24" style="color: #fdc425;">star</i>
+        <i class="material-icons md-24" style="color: #fdc425;">star</i>
+        <i class="material-icons md-24" style="color: #fdc425;">star</i>
+        <i class="material-icons md-24" style="color: #fdc425;">star</i>
+      </div>
+    </div>
+
+
+
+    <div class="loder-ratimg">
+      <div class="rating-container">
+        <p>5 stars</p>
+        <div class="rating-verbose"></div>
+        <p>(8)</p>
+      </div>
+      <div class="rating-container">
+        <p>4 stars</p>
+        <div class="rating-verbose-4"></div>
+        <p>(2)</p>
+      </div>
+      <div class="rating-container">
+        <p>3 stars</p>
+        <div class="rating-verbose-5"></div>
+        <p>(0)</p>
+      </div>
+      <div class="rating-container">
+        <p>2 stars</p>
+        <div class="rating-verbose-5"></div>
+        <p>(0)</p>
+      </div>
+      <div class="rating-container">
+        <p>1 stars</p>
+        <div class="rating-verbose-5"></div>
+        <p>(0)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container1 reviews comment">
+
+    <div class="user-img-part">
+      <div class="user-img">
+        <img src="/demo/man02.png">
+      </div>
+    </div>
+    <div class="text_content">
+      <div class="user-text">
+        <h2>Win Rool</h2>
+        <h4>August 15, 2021</h4>
+      </div>
+      <p> elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco.</p>
+    </div>
+
+
+  </div>
+
+
+  <!--             resume section starts                -->
+
+  <div id="resume" class="container1 resume">
+    <div class="text_content">
+      <h2>Resume</h2>
+      <div class="hr-line"></div>
+      <h6>Education</h6>
+      <div class="resume-content">
+        <p>2013 — 2018 <wbr> </p>
+          <p> Al Safwa Higher Institute of Engineering and Technology,
+            Bachelor of Civil Engineering Bachelor of civil engineering</p>
+      </div>
+      <div class="hr-line"></div>
+      <h6>Certifications</h6>
+      <div class="resume-content">
+        <p>2020 — 2020 <wbr> </p>
+          <p>
+            Certificate in an Islamic book (40 Quranic hadeeth)
+            I have an ijaza in an Islamic book called (40 Qur'anic hadeeth) and i give it to those who deserve it</p>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+    <!--            Footer section start             -->
+    <div class="footer">
+
+      <div class="box-container">
+
+         <div class="box">
+            <h3>about us</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet pariatur rerum consectetur architecto ad
+               tempora blanditiis quo aliquid inventore a.</p>
+         </div>
+
+         <div class="box">
+            <h3>quick links</h3>
+            <a href="#">home</a>
+            <a href="#">features</a>
+            <a href="#">about</a>
+            <a href="#">review</a>
+            <a href="#">pricing</a>
+            <a href="#">contact</a>
+         </div>
+
+         <div class="box">
+            <h3>follow us</h3>
+            <a href="#">facebook</a>
+            <a href="#">instagram</a>
+            <a href="#">pinterest</a>
+            <a href="#">twitter</a>
+         </div>
+
+         <div class="box">
+            <h3>contact info</h3>
+            <div class="info">
+               <i class="fas fa-phone"></i>
+               <p> +123-456-7890 <br></br> +111-2222-333 </p>
+            </div>
+            <div class="info">
+               <i class="fas fa-envelope"></i>
+               <p> example@gmail.com <br></br> example@gmail.com </p>
+            </div>
+            <div class="info">
+               <i class="fas fa-map-marker-alt"></i>
+               <p> mumbai, india - 400104 </p>
+            </div>
+         </div>
+
+      </div>
+
+      <h1 class="credit"> &copy; copyright @ 2021 by mr. web designer </h1>
+
+   </div>
+
+
+   {% endblock %}
+

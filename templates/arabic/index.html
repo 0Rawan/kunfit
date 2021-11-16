@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html dir="rtl" lang="ar">
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 
 <head>
@@ -16,22 +16,23 @@
       <input type="checkbox" id="menu-bar" />
       <label for="menu-bar" class="fas fa-bars"></label>
       <nav class="navbar">
-         <a href="#home" onclick="checkVisibility(4)">home</a>
-         <a href="#signup" onclick="checkVisibility(2)">Signup</a>
-         <a href="#signin" onclick="checkVisibility(1)">Sign in</a>
-         <a href="{{url_for('signup')}}">be a trainer</a>
+         <a href="#home" onclick="checkVisibility(4)">الرئيسة</a>
+         <a href="#signup" onclick="checkVisibility(2)">التسجيل</a>
+         <a href="#signin" onclick="checkVisibility(1)">تسجيل الدخول</a>
+         <a href="{{url_for('signup')}}">كن مدرب</a>
          <!-- <a href="#contact">contact</a> -->
       </nav>
       <!--            header section ends             -->
    </header>
    <!--            HeroSection section start             -->
-   <section class='heroSection'>
+   <section class='heroSection' style="background:url(../static/images/home-bg-img-flop.png) no-repeat; background-size: cover;
+   background-position: center; ">
       <div class="content">
          <!--<h3><span>OMO</span></h3>-->
-         <h3>Say hello to your private trainer</h3>
-         <p>Achive your fitness goals with a help from your personal trainer
+         <h3>تعرف على مدربك الشخصي الجديد</h3>
+         <p>بمساعدة مدربك الشخصي يمكنك تحقيق اهدافك الصحية و المحافظة عليها
          </p>
-         <a class="btn" href="#trainers" onclick="checkVisibility(3)">Chose your trainer </a>
+         <a class="btn" href="#trainers" onclick="checkVisibility(3)">اختر مدربك الشخصي </a>
       </div>
       <img src="{{url_for('static', filename='images/tablet-pic.png')}}" alt="" />
 
@@ -55,12 +56,9 @@
                <img src="{{url_for('static', filename='images/trainers-list-pic.png')}}" alt="" />
             </div>
             <div class="content">
-               <h1 class="heading">Meet your personal trainer</h1>
-               <p>you can find the perfect trainer who can fit your needs, they will help to focus on your specific
-                  golas,
-                  when you reach them they will help you maintain your gains</p>
-               <p>once you have started you can access your meals and workouts plans anytime and anywhere,
-                  then you can track your daily progress
+               <h1 class="heading">اختر مدربك الشخصي الخاص بك</h1>
+               <p>تصفح قائمة المدربين, واختر المدرب الانسب لك, ليساعدك على تحقيق ما تطمح له بواسطة الخطط المعدة خصيصا لك</p>
+               <p>ما ان اخترت مدربك يمكنك طرح الاسئلة والوصول الى الخطط المعدة لك في اي وقت واي زمان
                </p>
             </div>
          </div>
@@ -71,13 +69,10 @@
                <img src="{{url_for('static', filename='images/messages-pic.png')}}" alt="" />
             </div>
             <div class="content">
-               <h1 class="heading">Get feedback and ask questions</h1>
-               <p>Your personal trainer will make sure you don't have any problems with your plans, will encourge you
-                  to follow along your plans and guide you if you need any help.
+               <h1 class="heading">تقييم الاداء والتفاعل المستمر</h1>
+               <p>سيحرص مدربك الشخصي على ان تكون خططك الصحية تتماشى مع احتياجاتك وانك لا تواجه اية مشاكل, وسيعمل على تشجعيك.
                </p>
-               <p>with our messaging system you're going to be able to ask your personal trainer all the questions you
-                  want
-                  and you will be able to get feedback on your work.
+               <p> بواسطة خاصية الرسائل الموجودة في الموقع يمكنك طرح الاسئلة والحصول على الدعم في اي وقت شئت.
                </p>
             </div>
          </div>
@@ -195,44 +190,37 @@
       <div class="faqs">
          <div class="faq-wrapper">
             <div class="faq">
-               <div class="faq_question">What is <span class="logo"><span>Kun</span>Fit</span>?</div>
+               <div class="faq_question">ما هو <span class="logo"><span>Kun</span>Fit</span>؟</div>
                <div class="faq_answer">
 
-                  <span class="logo"><span>Kun</span>Fit</span> is service that helps you improve your life style that
-                  connects you with a personal
-                  trainers to help you achive your goal
+                  <span class="logo"><span>Kun</span>Fit</span> هي خدمة لتحسين اسلوب حياتك بواسطة المدربين الشخصيين الذين يساعدوك على تحقيق اهدافك
 
                </div>
             </div>
          </div>
          <div class="faq-wrapper">
             <div class="faq">
-               <div class="faq_question">How much dose <span class="logo"><span>Kun</span>Fit</span> cost?</div>
-               <div class="faq_answer">
-                  prcies vaires based on which trainer you're chosing></div>
+               <div class="faq_question">ماهي اسعار <span class="logo"><span>Kun</span>Fit</span>؟</div>
+               <div class="faq_answer">حاليا جميع الاشتراكات مجانية</div>
             </div>
          </div>
          <div class="faq-wrapper">
             <div class="faq">
-               <div class="faq_question">Can I Cancel any time I want?</div>
-               <div class="faq_answer">
-                  you can get a full refund after 5 days from subscribing,
-                     and you can cancel any time without getting refund </div>
+               <div class="faq_question">هل يمكنني الغاء الاشتراك؟</div>
+               <div class="faq_answer">نعم حاليا يمكنك الغاء الاشتراك اي وقت شئت</div>
                </div>
             </div>
             <div class="faq-wrapper">
                <div class="faq">
-                  <div class="faq_question">Can more than one person use the same account?</div>
-                  <div class="faq_answer">trainer plans will be prepared based on one person information,
-                     although more than one person can use the same account with the same plans </div>
+                  <div class="faq_question">هل يمكن اكثر من شخص استخدام الحساب ذاته؟</div>
+                  <div class="faq_answer">نعم ممكن, لكن الخطط الصحية ستكون فقط لمعلومات صاحب الحساب الرئيسي.</div>
                </div>
             </div>
             <div class="faq-wrapper">
                <div class="faq">
-                  <div class="faq_question">Can kids use it too?</div>
+                  <div class="faq_question">هل يمكن للاطفال الاشتراك؟</div>
                   <div class="faq_answer">
-                     <p>currently <span class="logo"><span>Kun</span>Fit</span> is only for adlut older than 18 years
-                        and above</p>
+                     <p><span class="logo"><span>Kun</span>Fit</span>فقط للبالغين فوق 18 سنة</p>
                   </div>
                </div>
             </div>

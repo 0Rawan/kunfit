@@ -1,0 +1,41 @@
+{% extends "base-navbar.html" %}
+{% block title %}Page not found{% endblock %}
+
+{% block head %}
+    {{ super() }}
+
+    <style>
+        section{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-size: cover;
+        background-position: center;
+        flex-direction: column;
+        min-height: 100vh;
+        }
+        
+        h1{
+            font-size: 90px;
+        }
+        h2{
+            font-size: 25px ;
+        }
+
+        h3{
+            margin-bottom: 10px;
+        }
+    </style>
+    
+{% endblock %}  
+
+{% block content %}
+
+<section>
+<h1>404</h1>
+<h2>Oooops!!</h2>
+<h3>THAT PAGE DOSEN'T EXIST OR IS UNAVAILABLE.</h3> 
+<a href="{{ url_for('index')}}">Go Back to Home</a>
+</section>
+{% endblock %}  
+

@@ -1,0 +1,626 @@
+{% extends "base.html" %}
+{% block title %}Meal Planner{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/popup-form.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile-edit.css') }}">
+
+{{ super() }}
+
+<style>
+  .breakpoint-large {
+    width: 50%;
+  }
+
+  .breakpoint-small {
+    width: 30%;
+  }
+
+  .breakpoint-large h1 {
+    font-size: 1rem;
+  }
+
+  .vid-container {
+    height: 90%;
+    overflow-y: auto;
+
+  }
+
+  .vid-gallery {
+
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+
+
+  .title-wrapper {
+    display: flex;
+  }
+
+  .button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button-wrapper.flexstart {
+    justify-content: flex-start;
+    width: max-content;
+
+    margin: 10px 5%;
+  }
+
+
+  .btn {
+    margin: 0 5px;
+    font-size: 14px;
+    padding: 0;
+    border-radius: 0px;
+    border-color: transparent;
+  }
+
+
+  .btn.btn-default {
+    background: #ebebeb;
+    color: #8f9096;
+  }
+
+  .btn.btn-primary {
+    background: #6c63ff;
+    color: white;
+  }
+
+
+
+
+  /*=======================================
+          meal planner inner content
+===========================================*/
+  .vid-nav-bar {
+
+    background-color: rgb(243, 243, 243);
+    width: 90%;
+    height: 20%;
+    margin: 0 auto 20px auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px lightgrey;
+  }
+
+
+
+  label {
+    margin: 0 10px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .input_nav.active {
+    color: gray;
+
+  }
+
+  input {
+    display: none;
+  }
+
+  input[type=checkbox]{
+    display: block;
+  }
+
+
+  label:hover {
+    color: gray;
+  }
+
+  .inner-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    transition: 0.3s;
+    object-fit: revert;
+  }
+
+  #check2:checked {
+    color: #000;
+  }
+
+  #check2:checked~.vid-gallery .family {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+    transform: 0.3s;
+  }
+
+  /*========================================
+                contacts section
+   =========================================*/
+  .trianees.container {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .contacts {
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+
+
+  }
+
+  .pic {
+    width: 4rem;
+    height: 4rem;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+  }
+
+  .contact {
+    position: relative;
+    margin-bottom: 1rem;
+    height: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact .pic {
+    position: absolute;
+    left: 0;
+  }
+
+
+  .contact .name {
+    font-weight: 400;
+    margin-bottom: 0.125rem;
+  }
+
+  .contact .message,
+  .contact .seen,
+  .contact .send-plans-a {
+    font-size: 0.9rem;
+    color: #999;
+  }
+
+  .contact .send-plans-a {
+    color: var(--blue);
+  }
+
+  .contact .name,
+  .contact .message,
+  .contact .seen,
+  .contact .send-plans-a {
+    margin-left: 5rem;
+    font-size: 0.9em;
+  }
+
+
+  .contact .badge {
+    position: absolute;
+    box-sizing: border-box;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    padding-top: 0.125rem;
+    border-radius: 1rem;
+    top: 0;
+    left: 2.5rem;
+    background: #333;
+    color: white;
+  }
+
+  .contacts h2 {
+    margin: 0.5rem 0 1.5rem 5rem;
+  }
+
+  .contacts .fa-bars {
+
+    color: #999;
+    transition: color 200ms;
+  }
+
+  .contacts .fa-bars:hover {
+    color: #666;
+  }
+
+  .contacts .contact:last-child {
+    margin: 0;
+  }
+
+
+  /* pics */
+  .pic.stark {
+    background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/73/SMH_Mentor_6.png');
+  }
+
+  .pic.banner {
+    background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/4/4f/BruceHulk-Endgame-TravelingCapInPast.jpg');
+  }
+
+  .pic.thor {
+    background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/9/98/ThorFliesThroughTheAnus.jpg');
+  }
+
+  .pic.danvers {
+    background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/0/05/HeyPeterParker.png');
+  }
+
+  .pic.rogers {
+    background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/7c/Cap.America_%28We_Don%27t_Trade_Lives_Vision%29.png');
+  }
+
+
+  /*=======================================*/
+  #send-plans .inner-container{
+    padding: 0.25rem;
+  }
+  
+  #send-plans form label {
+    width: 90%;
+  }
+
+  #send-plans form label hr{
+    width: 100%;
+    margin: 10px  0;
+  }
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="breakpoint-1-50">
+  <h1>Meals Planner</h1>
+  <div class="inner-container">
+    <div class="button-wrapper flexstart">
+
+      <button type="submit" class="btn btn-primary btn-block">Male</button>
+      <button type="button" class="btn btn-default btn-block">Female</button>
+      <a href="#add-plan" class="plus-sign" id="1" onclick="onclickBtn(this, 'none')">
+        <i style="margin-right: 10px;" class="fas fa-plus"></i>
+      </a>
+    </div>
+
+    <div class="vid-nav-bar">
+      <label for="check1" class="input_nav active">All catagories</label>
+      {% for topic in catagoriesArray %}
+      <label for={{topic}} class="input_nav">{{topic}}</label>
+      {% endfor %}
+    </div>
+
+
+    <div class="vid-container">
+      <input type="radio" name="videos" id="check1" checked>
+      {% for topic in catagoriesArray %}
+      <input type="radio" name="videos" id={{topic}}>
+      {% endfor %}
+
+      <div class="vid-gallery">
+
+
+        {%for value in catagories.items() %}
+        <div class="container1 {{((value|list)[0])}}">
+          <div class="title-wrapper ">
+            <!--plan name-->
+            <h1>{{(((value|list)[1])|list)[0]}}</h1>
+            <div class="button-wrapper">
+
+              <button type="submit" class="btn btn-primary btn-block">Copy</button>
+              <button type="button" class="btn btn-default btn-block">Edit</button>
+
+            </div>
+          </div>
+          <div class="inner-container ">
+            <div class="meal-container">
+              <h2 class="meal-time">Breakfast</h2>
+              <input type="text" id="input-breakfast" placeholder="Enter your meal">
+              <i class="fas fa-plus plus-sign" id="3" onclick="onclickBtn(this, 'none')"></i>
+            </div>
+
+            <hr>
+            <div class="meals" id="breakfast-div">
+
+              {% if "breakfast" in ((value|list)[1]) [((value|list)[1]|list)[0]]['mealTime'] %}
+              {%for meal in ((value|list)[1]) [((value|list)[1]|list)[0]]['mealTime']["breakfast"]["meals"]%}
+              <p> {{meal}}</p>
+              {%endfor%}
+              {% endif %}
+            </div>
+
+            <div class="meal-container">
+              <h2 class="meal-time">Lunch</h2>
+              <input type="text" id="input-lunch" placeholder="Enter your meal">
+              <i class="fas fa-plus plus-sign" id="4" onclick="onclickBtn(this, 'none')"></i>
+            </div>
+
+            <hr>
+            <div class="meals" id="lunch-div">
+              {% if "lunch" in ((value|list)[1]) [((value|list)[1]|list)[0]]['mealTime'] %}
+              {%for meal in ((value|list)[1]) [((value|list)[1]|list)[0]]['mealTime']["lunch"]["meals"]%}
+              <p> {{meal}}</p>
+              {%endfor%}
+              {% endif %}
+            </div>
+            <div class="meal-container">
+              <h2 class="meal-time">Dinner</h2>
+              <input type="text" id="input-dinner" placeholder="Enter your meal">
+              <i class="fas fa-plus plus-sign" id="5" onclick="onclickBtn(this, 'none')"></i>
+            </div>
+
+            <hr>
+            <div class="meals" id="dinner-div">
+              {% if "dinner" in ((value|list)[1]) [((value|list)[1]|list)[0]]['mealTime'] %}
+              {%for meal in ((value|list)[1]) [((value|list)[1]|list)[0]]['mealTime']["dinner"]["meals"]%}
+              <p> {{meal}}</p>
+              {%endfor%}
+              {% endif %}
+            </div>
+            <div class="meal-container">
+              <h2 class="meal-time">Snacks</h2>
+              <input type="text" id="input-snacks" placeholder="Enter your meal">
+              <i class="fas fa-plus plus-sign" id="6" onclick="onclickBtn(this, 'none')"></i>
+            </div>
+            <hr>
+            <div class="meals" id="snacks-div">
+              {% if "snacks" in ((value|list)[1]) [((value|list)[1]|list)[0]]['mealTime'] %}
+              {%for meal in ((value|list)[1]) [((value|list)[1]|list)[0]]['mealTime']["snacks"]["meals"]%}
+              <p> {{meal}}</p>
+              {%endfor%}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div class="breakpoint-small">
+  <h1>Subscribers</h1>
+  <div class="trianees container">
+    <div class="contacts" id='contacts' style="padding: 1rem;">
+      {% for sub in subscribers.items() %}
+      <div class="contact" >
+        <div class="pic rogers">
+        </div>
+        <div class="badge">14</div>
+        <div class="name">{{sub[1]['firstName']}}</div>
+        <div class="message">{{sub[1]['wieght']}}
+          {% if sub[1]['wieghtIsKg'] == "on"  %}
+          kg
+          {%else%}
+          lb
+          {%endif%}
+          {{sub[1]['hieght']}}
+          {% if sub[1]['hieghtIsCm'] == "on"  %}
+          cm
+          {%else%}
+          ft
+          {%endif%}
+
+
+        </div>
+        <a href="#send-plans" id="1" class="send-plans-a" onclick="onclickBtn(this,'{{ sub[0] }}')">send meal plans</a>
+      </div>
+      {%endfor%}
+    </div>
+
+
+  </div>
+
+</div>
+</div>
+
+<div id="add-plan" class="overlay">
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+
+      <!-- Icon -->
+      <div class="fadeIn first" style="margin:10px;">
+        <h5>Add week plan</h5>
+      </div>
+
+      <!-- Login Form -->
+      <form class="log-form" action="{{url_for('meal_planner')}}" method="POST">
+        <input type="text" id="planName" class="fadeIn second" name="planName"
+          placeholder="plan name, example lose wieght 1'st week">
+        <input type="text" id="PlanCatagory" class="fadeIn second" name="PlanCatagory"
+          placeholder="Plan catagory, example lose wieght">
+        <div class="form-group">
+          <input type="radio" name="gender" id="dot-1">
+          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot-3">
+          <label>Gender</label>
+          <div class="category" style="width: 100%;">
+            <label for="dot-1">
+              <span class="dot one"></span>
+              <span class="gender">Male</span>
+            </label>
+            <label for="dot-2">
+              <span class="dot two"></span>
+              <span class="gender">Female</span>
+            </label>
+            <label for="dot-3">
+              <span class="dot three"></span>
+              <span class="gender">Both</span>
+            </label>
+          </div>
+        </div>
+        <input type="submit" id="11" class="fadeIn fourth" onclick="onclickBtn(this)">
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div id="send-plans" class="overlay">
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+
+      <!-- Icon -->
+      <div class="fadeIn first" style="margin:10px;">
+        <h5>Add week plan</h5>
+      </div>
+      <div class="vid-nav-bar">
+        <label for="check1" class="input_nav active">All catagories</label>
+        {% for topic in catagoriesArray %}
+        <label for={{topic}} class="input_nav">{{topic}}</label>
+        {% endfor %}
+      </div>
+      <div class="vid-container">
+        <input type="radio" name="videos" id="check1" checked>
+        {% for topic in catagoriesArray %}
+        <input type="radio" name="videos" id={{topic}}>
+        {% endfor %}  
+      
+      <form class="log-form" action="{{url_for('meal_planner')}}" method="POST">
+        <input type="text" id="subID" name="subID" style="display: none;">
+        <div class="vid-gallery">
+        {%for value in catagories.items() %}
+          <div class="inner-container">
+            <input type="checkbox" name="plans" class="fadeIn second" value="{{((value|list)[0])}},{{(((value|list)[1])|list)[0]}}">
+            <label>{{((value|list)[0])}}<br> <hr>
+              {{(((value|list)[1])|list)[0]}}</label>
+          </div>  
+        {%endfor%}
+        </div>  
+        <input type="submit" id="11" class="fadeIn fourth" onclick="onclickBtn(this)">
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block script %}
+<script>
+  //navbar hide script
+  const inputNav = document.getElementsByClassName('input_nav');
+  const container = document.getElementsByClassName("container1")
+  for (i = 0; i < inputNav.length; i++) {
+    inputNav[i].addEventListener('click', function () {
+      //this.classList.toggle('active')
+      if (this.innerHTML == "All catagories") {
+        for (j = 0; j < container.length; j++)
+          container[j].style.display = "block"
+
+      } else {
+        for (j = 0; j < container.length; j++) {
+
+          if (container[j].classList[1] != this.innerHTML)
+            container[j].style.display = "none"
+          else
+            container[j].style.display = "block"
+        }
+      }
+    });
+  }
+
+  //add meal script
+
+
+  const inputWeekPlanBox = document.getElementById("weekPlan")
+  //get input boxes
+  const inputBreakfastBox = document.getElementById("input-breakfast");
+  const inputlLunchBox = document.getElementById("input-lunch");
+  const inputDinnerBox = document.getElementById("input-dinner");
+  const inputSnacksBox = document.getElementById("input-snacks");
+
+  // make suree input boxes are hidden at first
+  inputBreakfastBox.style.display = "none"
+  inputlLunchBox.style.display = "none"
+  inputDinnerBox.style.display = "none"
+  inputSnacksBox.style.display = "none"
+
+  //get all the divs to show food (meals) in it
+  const mealBreakFast = document.getElementById("breakfast-div")
+  const mealLunch = document.getElementById("lunch-div")
+  const mealDinner = document.getElementById("dinner-div")
+  const mealSnacks = document.getElementById("snacks-div")
+
+
+  function addMealtoDiv(inputMealBox, meal, mealTime) {
+    //create new p elemnt
+    const mealParagraph = document.createElement("p");
+    //if plus sign clicked and input box is shown
+    if (inputMealBox.style.display !== "none") {
+      //hide input meal box
+      inputMealBox.style.display = "none";
+      //if the inputed value is greater than zero
+      if (inputMealBox.value.length !== 0) {
+
+        mealParagraph.innerHTML = inputMealBox.value
+        meal.appendChild(mealParagraph)
+        sendData(mealTime, inputMealBox.value)
+
+        inputMealBox.value = ''
+      }
+
+    } else {
+      inputMealBox.style.display = "block";
+    }
+  }
+
+
+  /****************************************************/
+
+
+  function onclickBtn(btn, data) {
+    console.log("here1")
+    var btnId = btn.id
+    switch (btnId) {
+      case '1':
+        subID = document.getElementById("subID")
+        subID.defaultValue  = data
+      case '3':
+        addMealtoDiv(inputBreakfastBox, mealBreakFast, "breakfast")
+
+        break
+
+      case '4':
+        addMealtoDiv(inputlLunchBox, mealLunch, "lunch")
+        break
+
+      case '5':
+        addMealtoDiv(inputDinnerBox, mealDinner, "dinner")
+        break
+
+      case '6':
+        addMealtoDiv(inputSnacksBox, mealSnacks, "snacks")
+        break
+    }
+  }
+
+  function sendData(mealTime, meal) {
+    console.log("here")
+    $.ajax({
+      url: "/meal-planner",
+      type: "POST",
+      data: {
+        mealTimeInfo: mealTime,
+        mealInfo: meal,
+      },
+      success: function (data) {
+        isSuccess = true
+      }
+    });
+
+  }
+</script>
+{% endblock %}

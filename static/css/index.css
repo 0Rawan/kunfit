@@ -654,7 +654,7 @@ line-height: 1.5;
   opacity: 0;
 }
 
-#popup3.overlay{
+#trainers.overlay{
   overflow-y: auto;
 }
 .overlay:target {

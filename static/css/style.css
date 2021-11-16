@@ -293,7 +293,7 @@ section.user .nav-list {
   list-style: none;
 }
 
-section.user .nav-list li {
+section.user .nav-list li a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -314,7 +314,7 @@ section.user .nav-list li {
 }
 
 
-section.user .nav-list li.active {
+section.user .nav-list li.active a {
   font-weight: 700;
 }
 

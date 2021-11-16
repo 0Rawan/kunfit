@@ -1,0 +1,283 @@
+{% extends "base-profile.html" %}
+{% block title %}Edit Profile{% endblock %}
+
+{% block head %}
+
+{{ super() }}
+
+<style>
+
+:root{
+    --purple:#814096;
+    --pink:#F83292;
+    --gradient:linear-gradient(90deg, var(--purple), var(--pink));
+  }
+
+  *{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none; border:none;
+    text-transform: capitalize;
+  }
+
+  *::selection{
+    background:var(--pink);
+    color:#fff;
+  }
+
+  html{
+    overflow-x: hidden;
+  }
+
+  .container{
+    margin: 7rem auto;
+  }
+  /* =====================================
+                NavBar 
+  ======================================*/
+  
+  header{
+    position: fixed;
+    top:0; left:0;
+    width:100%;
+    background:#fff;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+    padding:1.25rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+  }
+
+  header .logo{
+    font-size: 1.25rem;
+    color:var(--purple);
+  }
+
+  header .logo span{
+    color:var(--pink);
+  }
+
+  header .navbar a{
+    font-size: 1rem;
+    margin-left: 1.7rem;
+    color:var(--purple);
+  }
+
+  header .navbar a:hover{
+    color:var(--pink);
+  }
+
+  header input{
+    display: none;
+  }
+
+  header label{
+    font-size: 2.5rem;
+    color:var(--purple);
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  /* =====================================
+               today's meals
+  ======================================*/
+
+.language-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+ 
+}
+
+
+.meal-time {
+  width: 30%;
+}
+
+.plus-sign {
+  font-size: 1.125rem;
+  padding: 3px;
+  padding-top: 6px;
+
+  float: right;
+  text-align: center;
+  margin: 10px;
+}
+
+#input-meal {
+  display: none;
+  transition: all step-end 500ms;
+}
+
+
+
+  </style>
+
+{% endblock %}
+
+
+{% block content %}
+<main>
+  <div class="container profile">
+    <h1>create your profile</h1>
+    <div class="inner-container">
+
+      <form action="{{url_for('update_trainer_profile')}}" method="POST" enctype=multipart/form-data>
+       
+        <div  class="small-container">
+          <div class="upload">
+            <input type=file name=file>
+          </div>
+        </div>
+
+        <div class="small-container">
+
+          <div class="form-group small">
+
+            <label for=firstName>First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName">
+
+          </div>
+          <div class="form-group small">
+
+            <label for=lastName>Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName">
+
+          </div>
+        </div>
+
+        <div class="small-container">
+          <div class="form-group small">
+
+            <label for=bio>bio</label>
+            <input type="text" class="form-control" id="bio" name="bio">
+
+          </div>
+          <div class="form-group small">
+
+            <label for=birthday>Birthday</label>
+            <input type="date" class="form-control" id="birthday" name="birthday">
+
+          </div>
+
+
+        </div>
+        
+
+        <!-- <div class="small-container">
+          <div class="form-group small">
+            <label for="language">Spoken languages</label>
+            <div class="language-container">
+              <input type="text" class="form-control" name="language" id="language" >
+              <i class="fas fa-plus plus-sign" id="1" onclick="onclickBtn(this)"></i>
+            </div>
+         </div>
+         <div class="form-group small">
+          <div class="meals" id="language-div">
+            <label for="language">Spoken languages</label>
+          </div>
+         </div>
+
+        </div> -->
+
+        <div class="small-container">
+          <div class="form-group big">
+
+            <label for=introduction>Introduce Your Self</label>
+            <input type="text" class="form-control" id="introduction" name="introduction">
+
+          </div>
+        </div>
+
+        <div class="small-container">
+          <div class="form-group big">
+
+            <label for=Tstyle>Training Style</label>
+            <input type="text" class="form-control" id="Tstyle" name="Tstyle">
+
+          </div>
+        </div>
+
+    
+
+
+        <div class="button-wrapper">
+
+
+
+          <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+          <button type="button" class="btn btn-default btn-block">Cancel</button>
+
+
+        </div>
+
+      </form>
+
+    </div>
+</main>
+
+</div>
+
+{% endblock %}
+
+
+{% block script %}  
+
+<script>
+
+//get input boxes
+const inputBreakfastBox = document.getElementById("language");
+
+
+
+
+
+//get all the divs to show food (meals) in it
+const mealBreakFast = document.getElementById("language-div")
+
+function onclickBtn(btn) {
+   var btnId = btn.id
+   switch (btnId) {
+      case '1':
+         addMealtoDiv(inputBreakfastBox, mealBreakFast, "breakfast")
+
+         break
+
+      case '2':
+         addMealtoDiv(inputlLunchBox, mealLunch, "lunch")
+         break
+
+      case '3':
+         addMealtoDiv(inputDinnerBox, mealDinner, "dinner")
+         break
+
+      case '4':
+         addMealtoDiv(inputSnacksBox, mealSnacks, "snacks")
+         break
+   }
+}
+
+function addMealtoDiv(inputMealBox, meal, mealTime) {
+   //create new p elemnt
+   const mealParagraph = document.createElement("p");
+      //if the inputed value is greater than zero
+      if (inputMealBox.value.length !== 0) {
+        //get the input box value
+         mealParagraph.innerHTML = inputMealBox.value
+         //delete iput box value
+         inputMealBox.value = ""
+         meal.appendChild(mealParagraph)
+         sendData(mealTime, inputMealBox.value)
+
+         inputMealBox.value = ''
+      }
+
+ 
+}
+</script>
+{% endblock %}
