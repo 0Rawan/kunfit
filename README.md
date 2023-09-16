@@ -1,10 +1,10 @@
 <br/>
 <p align="center">
   <a href="https://github.com/0Rawan/kunfit">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+     <h3 align="center">KunFit</h3>
   </a>
 
-  <h3 align="center">KunFit</h3>
+ 
 
   <p align="center">
     life style helper website 
@@ -36,7 +36,7 @@
 
 ## About The Project
 
-![Screen Shot](images/screenshot.png)
+![Screen Shot](images/kunfit.png)
 
 Overview:
 
