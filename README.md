@@ -177,8 +177,3 @@ Distributed under the MIT License. See [LICENSE](https://github.com/0Rawan/kunfi
 
 * **Rawan Kamal** - ** - [Rawan Kamal](https://github.com/0Rawan) - **
 
-## Acknowledgements
-
-* []()
-* []()
-* []()
